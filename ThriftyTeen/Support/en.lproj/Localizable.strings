@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  ThriftyTeen
+
+  Created by David Ruvinskiy on 4/25/23.
+  
+*/
+
+"years-view.navigation-item.title" = "Years";
+"month-expenses-view.label.overview" = "%@ Overview";
+"overview-view.label.spent-most-on" = "You spent the most on:";
+"overview-view.label.monthly-spend" = "Total monthly spend:";

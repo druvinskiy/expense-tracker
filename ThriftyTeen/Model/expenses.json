@@ -1,0 +1,1486 @@
+[
+	{
+		"id": "dca93805-3273-4281-b2d7-362386bb8998",
+		"title": "Target",
+		"category": "Shopping",
+		"amount": 87.23,
+		"date": "2020-01-15"
+	},
+	{
+		"id": "72c4f73f-af60-4ac9-8c31-b3210e14c10f",
+		"title": "CVS",
+		"category": "Personal Care",
+		"amount": 30.45,
+		"date": "2023-01-20"
+	},
+	{
+		"id": "59abe3b4-7ab4-427d-997d-93ab37bb5753",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 59.99,
+		"date": "2023-01-02"
+	},
+	{
+		"id": "eb25f6b0-490c-453d-a7dc-f5c817611c3a",
+		"title": "Joe's Deli",
+		"category": "Food",
+		"amount": 12.5,
+		"date": "2023-01-09"
+	},
+	{
+		"id": "ef8a2ef7-e105-4e04-a85f-096d5fef6f39",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 4.75,
+		"date": "2023-01-25"
+	},
+	{
+		"id": "04f47eb8-79c5-4dee-b35f-bcb82bdf5a22",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 15.99,
+		"date": "2023-01-12"
+	},
+	{
+		"id": "beec9fd2-e587-43b3-b12c-2c6a4bdfda6a",
+		"title": "Gas",
+		"category": "Transportation",
+		"amount": 47.19,
+		"date": "2023-01-23"
+	},
+	{
+		"id": "0cace0fe-885d-4fd8-8368-f3949f29e61a",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 16.1,
+		"date": "2023-01-01"
+	},
+	{
+		"id": "e0b754b7-399a-418e-ae40-8e3632540b5b",
+		"title": "Spotify",
+		"category": "Entertainment",
+		"amount": 9.99,
+		"date": "2023-01-08"
+	},
+	{
+		"id": "e0bd431e-36d1-441e-ac67-2f72ecee575b",
+		"title": "Gym",
+		"category": "Personal Care",
+		"amount": 45.0,
+		"date": "2023-01-18"
+	},
+	{
+		"id": "6ab864f0-83c7-482b-b4ec-836ab365cd83",
+		"title": "Takeout",
+		"category": "Food",
+		"amount": 29.35,
+		"date": "2023-01-22"
+	},
+	{
+		"id": "691162b1-e4f9-4047-bfb0-02edfa45afb5",
+		"title": "Clothes",
+		"category": "Shopping",
+		"amount": 79.99,
+		"date": "2023-01-24"
+	},
+	{
+		"id": "293a54b0-ee9e-4e16-a347-16f8c0abc5f3",
+		"title": "Apple Music",
+		"category": "Entertainment",
+		"amount": 9.99,
+		"date": "2023-01-07"
+	},
+	{
+		"id": "d36aeddf-802b-4ca0-af20-3ee34d26fa39",
+		"title": "Groceries",
+		"category": "Food",
+		"amount": 72.98,
+		"date": "2023-01-26"
+	},
+	{
+		"id": "6e8b3d73-ed1c-446b-a646-762675e49fd4",
+		"title": "Car Insurance",
+		"category": "Transportation",
+		"amount": 125.0,
+		"date": "2023-01-01"
+	},
+	{
+		"id": "4a19f0c8-710f-4483-808a-ad8022ac917f",
+		"title": "Movie",
+		"category": "Entertainment",
+		"amount": 15.0,
+		"date": "2023-01-21"
+	},
+	{
+		"id": "742e78fe-5583-428e-9bb3-a070fc13f9b7",
+		"title": "Rent",
+		"category": "Housing",
+		"amount": 1700.0,
+		"date": "2023-01-01"
+	},
+	{
+		"id": "d401f9ba-bb08-492b-ba52-e517ff985220",
+		"title": "Utilities",
+		"category": "Bills",
+		"amount": 160.0,
+		"date": "2023-01-03"
+	},
+	{
+		"id": "7907fb18-0148-407e-88c1-d8d38ed21299",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 23.96,
+		"date": "2023-02-06"
+	},
+	{
+		"id": "6c985a8d-d87b-4407-acbf-adf7b1972dc5",
+		"title": "Whole Foods",
+		"category": "Food",
+		"amount": 12.75,
+		"date": "2023-02-12"
+	},
+	{
+		"id": "7120eb82-1aae-47bb-9995-0f2b1035b652",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 5.23,
+		"date": "2023-02-18"
+	},
+	{
+		"id": "058acd18-8d38-4dba-b98c-8e0059d608b0",
+		"title": "CVS",
+		"category": "Personal Care",
+		"amount": 33.92,
+		"date": "2023-02-23"
+	},
+	{
+		"id": "29d44145-b30a-4b02-8c42-00987698b78e",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 15.99,
+		"date": "2023-02-08"
+	},
+	{
+		"id": "034b2d0b-7366-4136-8079-d927e2ca46a2",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 56.78,
+		"date": "2023-02-15"
+	},
+	{
+		"id": "0f70c516-87e9-4ed3-95f3-11b2483e51b0",
+		"title": "The Bookstore",
+		"category": "Books",
+		"amount": 10.55,
+		"date": "2023-02-01"
+	},
+	{
+		"id": "b1adbecc-7619-4160-be2e-5a542d91f348",
+		"title": "Petco",
+		"category": "Pet Care",
+		"amount": 45.67,
+		"date": "2023-02-19"
+	},
+	{
+		"id": "9ec89c65-eee2-4143-9196-e509ab78b4b7",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 47.18,
+		"date": "2023-02-27"
+	},
+	{
+		"id": "cde0ade8-f0b6-4ba2-b115-8e6e1001eea2",
+		"title": "Movie",
+		"category": "Entertainment",
+		"amount": 37.98,
+		"date": "2023-02-13"
+	},
+	{
+		"id": "5af4c85a-377a-4a71-bdb8-51067fcaf68e",
+		"title": "Gym",
+		"category": "Fitness",
+		"amount": 29.99,
+		"date": "2021-02-28"
+	},
+	{
+		"id": "710f1d19-d754-4387-b758-6d222de82ba8",
+		"title": "Lunch with friends",
+		"category": "Food",
+		"amount": 15.0,
+		"date": "2023-02-11"
+	},
+	{
+		"id": "fbd1aafb-04e1-4d28-a74e-324f06f47afa",
+		"title": "Joe's Deli",
+		"category": "Food",
+		"amount": 13.25,
+		"date": "2023-03-02"
+	},
+	{
+		"id": "6fd29800-7898-49a9-b0fe-45f6ea20ff39",
+		"title": "Uber",
+		"category": "Travel",
+		"amount": 16.45,
+		"date": "2023-03-06"
+	},
+	{
+		"id": "c74dff12-5cd9-4732-8d1c-22315e8cd8cc",
+		"title": "Home Depot",
+		"category": "Home",
+		"amount": 67.33,
+		"date": "2023-03-07"
+	},
+	{
+		"id": "7f792613-f4f3-42e8-b477-bb2863591620",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 45.99,
+		"date": "2023-03-10"
+	},
+	{
+		"id": "0050d1b1-c6f4-4355-afb2-f329bec13947",
+		"title": "Gas Station",
+		"category": "Travel",
+		"amount": 27.85,
+		"date": "2023-03-12"
+	},
+	{
+		"id": "bd88848c-213f-4be6-8f30-b522066c7207",
+		"title": "Barber Shop",
+		"category": "Personal Care",
+		"amount": 28.5,
+		"date": "2023-03-14"
+	},
+	{
+		"id": "0a7cfe2f-33ec-4131-bc86-20ab13c3b06f",
+		"title": "Movies",
+		"category": "Entertainment",
+		"amount": 40.0,
+		"date": "2023-03-17"
+	},
+	{
+		"id": "aec1bb2f-3cd6-4c71-95c3-bba6cbbf867d",
+		"title": "Gym",
+		"category": "Health",
+		"amount": 30.0,
+		"date": "2023-03-20"
+	},
+	{
+		"id": "04fba5ac-b24c-498f-a30c-b98755c15c03",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 8.55,
+		"date": "2023-03-22"
+	},
+	{
+		"id": "d04c3134-1886-4a50-aac5-ad39e35fab68",
+		"title": "Pet Store",
+		"category": "Pet Care",
+		"amount": 35.0,
+		"date": "2023-03-26"
+	},
+	{
+		"id": "5370eb6f-46cf-498c-be73-ba0fa6c22b02",
+		"title": "Electric Bill",
+		"category": "Utilities",
+		"amount": 120.0,
+		"date": "2023-03-28"
+	},
+	{
+		"id": "b6365b87-3d5d-4e3d-b421-b814ebf4c6f9",
+		"title": "Grocery Store",
+		"category": "Food",
+		"amount": 90.0,
+		"date": "2023-03-30"
+	},
+	{
+		"id": "c2d87d25-4f9e-480f-a9df-bff677f6f169",
+		"title": "Nike Shoes",
+		"category": "Shoes",
+		"amount": 120.67,
+		"date": "2023-04-03"
+	},
+	{
+		"id": "72cf338c-ed86-4200-8310-fb498a10365b",
+		"title": "Travel to Las Vegas",
+		"category": "Travel",
+		"amount": 500.0,
+		"date": "2023-04-15"
+	},
+	{
+		"id": "36c8ebfd-bbe4-4f80-b3c4-bd8ceb8ebd57",
+		"title": "Gym Membership",
+		"category": "Subscription",
+		"amount": 30.0,
+		"date": "2023-04-10"
+	},
+	{
+		"id": "6630884b-a024-458f-a4c9-8339b1f3f131",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 7.5,
+		"date": "2023-04-05"
+	},
+	{
+		"id": "3d74af9a-bf72-4556-8e30-a23a07af9bc7",
+		"title": "Lunch at Jane’s",
+		"category": "Food",
+		"amount": 13.75,
+		"date": "2023-04-13"
+	},
+	{
+		"id": "a32da30f-ba08-4ab4-9ba5-8d668cf36287",
+		"title": "Uber to work",
+		"category": "Transportation",
+		"amount": 10.0,
+		"date": "2023-04-07"
+	},
+	{
+		"id": "1b99ebcc-1673-4f31-bbbc-62d50968e837",
+		"title": "Movie Night",
+		"category": "Entertainment",
+		"amount": 20.0,
+		"date": "2023-04-24"
+	},
+	{
+		"id": "59af4617-4782-4c55-8d44-52b9db08b68d",
+		"title": "Amazon Purchase",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-04-26"
+	},
+	{
+		"id": "d4da2584-7199-4dc7-97db-ea478cce3cdb",
+		"title": "Gas for Car",
+		"category": "Transportation",
+		"amount": 35.0,
+		"date": "2023-04-20"
+	},
+	{
+		"id": "a9015894-c526-40ae-b4cb-a40730d939f6",
+		"title": "Utilities",
+		"category": "Bills",
+		"amount": 150.0,
+		"date": "2023-04-30"
+	},
+	{
+		"id": "d218e692-b268-43da-be82-71278b6e5846",
+		"title": "Subway Lunch",
+		"category": "Food",
+		"amount": 9.0,
+		"date": "2023-04-08"
+	},
+	{
+		"id": "feab5932-c21a-4e94-b6f7-c59b08dcf476",
+		"title": "Phone Bill",
+		"category": "Bills",
+		"amount": 100.0,
+		"date": "2023-04-18"
+	},
+	{
+		"id": "1f4cc08a-9281-4177-9e4d-8ee7b6299b39",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 47.5,
+		"date": "2023-04-06"
+	},
+	{
+		"id": "568c739b-1378-4f5a-b82e-f0874d0158c9",
+		"title": "Super Market",
+		"category": "Food",
+		"amount": 90.17,
+		"date": "2023-04-08"
+	},
+	{
+		"id": "9415f5db-c9d0-4cfb-a4c6-74126446e86d",
+		"title": "EAT Cafe",
+		"category": "Food",
+		"amount": 12.5,
+		"date": "2023-04-12"
+	},
+	{
+		"id": "1c91a749-efa7-4b61-a388-a7d973adfd67",
+		"title": "Movies",
+		"category": "Entertainment",
+		"amount": 30.0,
+		"date": "2022-04-14"
+	},
+	{
+		"id": "e5beea34-2b53-435e-98f2-04d4be11df10",
+		"title": "Car Maintenance",
+		"category": "Transportation",
+		"amount": 200.75,
+		"date": "2023-04-15"
+	},
+	{
+		"id": "ea4e81d7-af9d-411f-bce6-9d1b02060faf",
+		"title": "Home Depot",
+		"category": "Home",
+		"amount": 75.1,
+		"date": "2023-04-18"
+	},
+	{
+		"id": "96ba1ed2-c4f3-4862-8043-df6745bbede3",
+		"title": "New Shoes",
+		"category": "Clothing",
+		"amount": 110.0,
+		"date": "2023-04-20"
+	},
+	{
+		"id": "204305d4-6918-40c1-a3e0-7866ca4f3960",
+		"title": "Taxi Ride",
+		"category": "Transportation",
+		"amount": 25.0,
+		"date": "2023-04-22"
+	},
+	{
+		"id": "efc61950-866c-4c68-87b8-f94fdf8f6384",
+		"title": "Lunch with friends",
+		"category": "Food",
+		"amount": 45.0,
+		"date": "2023-04-23"
+	},
+	{
+		"id": "071e39eb-f8be-41cd-a3a8-4fbeaa4442b9",
+		"title": "Gym Membership",
+		"category": "Health",
+		"amount": 55.0,
+		"date": "2023-04-24"
+	},
+	{
+		"id": "fdb17fc5-c229-4478-9611-4ecfe94096be",
+		"title": "Coffee Shop",
+		"category": "Food",
+		"amount": 7.5,
+		"date": "2023-04-25"
+	},
+	{
+		"id": "51011a92-2513-41d4-9f26-497541b1e0ee",
+		"title": "Train Tickets",
+		"category": "Travel",
+		"amount": 70.0,
+		"date": "2023-04-27"
+	},
+	{
+		"id": "95a67b79-3ab7-41de-b4be-197cd9cdfcc0",
+		"title": "Grocery Shopping",
+		"category": "Food",
+		"amount": 47.98,
+		"date": "2023-05-08"
+	},
+	{
+		"id": "5e10b224-fe33-4288-8c6e-e48f1463d943",
+		"title": "Movie Night",
+		"category": "Entertainment",
+		"amount": 26.25,
+		"date": "2023-05-15"
+	},
+	{
+		"id": "549cbe12-78d1-4340-be09-516c59933511",
+		"title": "Gas Fill Up",
+		"category": "Transportation",
+		"amount": 37.52,
+		"date": "2023-05-19"
+	},
+	{
+		"id": "614baf56-f2c2-4721-9eed-26837ba9c1bd",
+		"title": "Subway Commute",
+		"category": "Transportation",
+		"amount": 32.0,
+		"date": "2023-05-02"
+	},
+	{
+		"id": "d99076c8-9f0d-4a50-b233-e3245b63f496",
+		"title": "Takeout Dinner",
+		"category": "Food",
+		"amount": 15.57,
+		"date": "2023-05-17"
+	},
+	{
+		"id": "354ec355-ce65-41a7-a20a-98da473a8adf",
+		"title": "Monthly Rent",
+		"category": "Housing",
+		"amount": 1000.0,
+		"date": "2023-05-01"
+	},
+	{
+		"id": "cc43cd59-cb00-4479-a587-c234a5443689",
+		"title": "Utility Bill",
+		"category": "Bills",
+		"amount": 120.0,
+		"date": "2023-05-18"
+	},
+	{
+		"id": "810dc0de-2960-447f-83d7-0ea81eaed352",
+		"title": "Clothing",
+		"category": "Personal",
+		"amount": 56.0,
+		"date": "2023-05-21"
+	},
+	{
+		"id": "9a001edf-dc79-4a4e-b513-651060ba300e",
+		"title": "Gym Membership",
+		"category": "Subscription",
+		"amount": 34.99,
+		"date": "2023-05-10"
+	},
+	{
+		"id": "eda31ec4-e4ca-45e9-8f82-26b5cb6105fd",
+		"title": "Uber Ride",
+		"category": "Transportation",
+		"amount": 20.76,
+		"date": "2023-05-24"
+	},
+	{
+		"id": "48a5eb06-421a-41ba-a8d6-285e5109a0ce",
+		"title": "Amazon Purchase",
+		"category": "Shopping",
+		"amount": 35.0,
+		"date": "2023-05-01"
+	},
+	{
+		"id": "2e6f9f95-5f6c-4e81-a60b-115e4b770362",
+		"title": "Lunch Out",
+		"category": "Food",
+		"amount": 12.5,
+		"date": "2023-05-22"
+	},
+	{
+		"id": "c7d1bb89-cd2e-4685-92c5-259865792c4a",
+		"title": "Spotify",
+		"category": "Subscription",
+		"amount": 9.99,
+		"date": "2023-05-12"
+	},
+	{
+		"id": "7a48569d-440b-403b-81c5-a8a8b01611ad",
+		"title": "Parking",
+		"category": "Transportation",
+		"amount": 6.0,
+		"date": "2023-05-06"
+	},
+	{
+		"id": "ac7588bb-efac-442e-ade6-94a30f7b39db",
+		"title": "Bookstore",
+		"category": "Personal",
+		"amount": 21.95,
+		"date": "2023-05-27"
+	},
+	{
+		"id": "c8b7c848-a0d2-4667-915e-d2cd38d4ca70",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 16.99,
+		"date": "2023-05-12"
+	},
+	{
+		"id": "e0e8b2a1-ad44-456f-9d34-cda3555d337a",
+		"title": "Coffee Shop",
+		"category": "Food",
+		"amount": 4.5,
+		"date": "2023-05-11"
+	},
+	{
+		"id": "6338a7b7-46c9-4a09-a809-8015e9c3f269",
+		"title": "Home Supplies",
+		"category": "Shopping",
+		"amount": 27.0,
+		"date": "2023-05-23"
+	},
+	{
+		"id": "ab56daf7-10ba-4415-9794-e2539e0ac84c",
+		"title": "New Shoes",
+		"category": "Personal",
+		"amount": 89.99,
+		"date": "2023-05-20"
+	},
+	{
+		"id": "b89b88e3-4312-4546-951d-57bd53a2e353",
+		"title": "Cab Ride",
+		"category": "Transportation",
+		"amount": 20.0,
+		"date": "2023-05-15"
+	},
+	{
+		"id": "cdaba2c0-aa36-46ec-b191-0f645ea683dd",
+		"title": "Chipotle",
+		"category": "Food",
+		"amount": 26.78,
+		"date": "2023-06-05"
+	},
+	{
+		"id": "f71a6766-8e66-4b5a-8737-6f908b5755fc",
+		"title": "Gym Membership",
+		"category": "Fitness",
+		"amount": 59.99,
+		"date": "2023-06-08"
+	},
+	{
+		"id": "6e49fddc-2d31-465a-b307-faff08d9b3f0",
+		"title": "Home Depot",
+		"category": "Home Improvement",
+		"amount": 150.0,
+		"date": "2023-06-12"
+	},
+	{
+		"id": "b7448d19-eeac-4910-a8d0-e81972c47f71",
+		"title": "Petco",
+		"category": "Pet Supplies",
+		"amount": 40.75,
+		"date": "2023-06-15"
+	},
+	{
+		"id": "a9b2afb4-c4af-4bbe-a112-febb9d2543ef",
+		"title": "Airbnb",
+		"category": "Travel",
+		"amount": 125.0,
+		"date": "2023-06-18"
+	},
+	{
+		"id": "599ef918-900f-40ca-9c8b-74845178bcd5",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 13.99,
+		"date": "2023-06-23"
+	},
+	{
+		"id": "4ee4169a-a870-4618-8679-f7e9f4953de9",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 47.62,
+		"date": "2023-06-27"
+	},
+	{
+		"id": "282f15cc-8cc2-4b45-a753-d878240e7d3e",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 5.25,
+		"date": "2023-06-28"
+	},
+	{
+		"id": "04c94b6a-4245-4906-a461-c697de07161d",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 19.35,
+		"date": "2023-06-30"
+	},
+	{
+		"id": "0ed5ed44-bc13-41f1-87b6-54af533fd357",
+		"title": "Clothing Store",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-06-02"
+	},
+	{
+		"id": "c3a92ad4-3e13-48b5-b01b-30fa3d9b62d9",
+		"title": "Supermarket",
+		"category": "Food",
+		"amount": 70.0,
+		"date": "2023-06-17"
+	},
+	{
+		"id": "ec2b1719-e4a3-42c5-ad9c-9eaf85b73a40",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 49.99,
+		"date": "2023-06-20"
+	},
+	{
+		"id": "90cda40d-f185-4c30-a685-2537c6aeecf0",
+		"title": "Gas",
+		"category": "Transportation",
+		"amount": 80.11,
+		"date": "2023-07-17"
+	},
+	{
+		"id": "64ab508b-4b95-4d64-9d44-e2c6b17d3051",
+		"title": "Grocery Outlet",
+		"category": "Food",
+		"amount": 65.23,
+		"date": "2023-07-05"
+	},
+	{
+		"id": "382ced8c-d192-46a6-8558-3b16d82f8685",
+		"title": "Westfield Mall",
+		"category": "Shopping",
+		"amount": 35.67,
+		"date": "2023-07-11"
+	},
+	{
+		"id": "3b03a324-f84f-4b6f-806b-2c5f11325f04",
+		"title": "Bargain Books",
+		"category": "Shopping",
+		"amount": 22.55,
+		"date": "2023-07-18"
+	},
+	{
+		"id": "084bdcea-8b6f-425a-bfb0-75ec58962d07",
+		"title": "Barbarian Steakhouse",
+		"category": "Food",
+		"amount": 40.29,
+		"date": "2023-07-23"
+	},
+	{
+		"id": "495a8868-b8ef-486b-bcf3-dbe0ec94c79c",
+		"title": "Sam's Coffee",
+		"category": "Food",
+		"amount": 5.55,
+		"date": "2023-07-06"
+	},
+	{
+		"id": "ac1b2fc1-3def-4f91-a0ba-fc04a4fe4521",
+		"title": "KTV Entertainment",
+		"category": "Entertainment",
+		"amount": 30.0,
+		"date": "2023-07-26"
+	},
+	{
+		"id": "9f0102e9-1b66-4136-add9-068f29037740",
+		"title": "Flix and Chill",
+		"category": "Entertainment",
+		"amount": 12.99,
+		"date": "2023-07-01"
+	},
+	{
+		"id": "709b49e2-319b-4a26-8660-c0a52150872a",
+		"title": "A & J Bistro",
+		"category": "Food",
+		"amount": 25.5,
+		"date": "2023-07-29"
+	},
+	{
+		"id": "23b9f09d-56cf-4f44-866a-db0a911ec0b7",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 50.12,
+		"date": "2023-07-02"
+	},
+	{
+		"id": "06303543-245c-4603-bd86-b8d92fadfbff",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 12.99,
+		"date": "2023-07-10"
+	},
+	{
+		"id": "29fe802f-9784-4ce7-bf8e-b72141274fe2",
+		"title": "Spotify",
+		"category": "Entertainment",
+		"amount": 9.99,
+		"date": "2023-07-01"
+	},
+	{
+		"id": "ec481817-c169-452d-adcb-f4b934303b34",
+		"title": "Library",
+		"category": "Entertainment",
+		"amount": 5.0,
+		"date": "2023-07-30"
+	},
+	{
+		"id": "68aba866-9777-4876-956d-d18a845122c4",
+		"title": "Clothing Store",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-07-12"
+	},
+	{
+		"id": "4231af92-7b08-4f26-84f8-fd005afb5f05",
+		"title": "Electricity",
+		"category": "Utilities",
+		"amount": 150.0,
+		"date": "2023-07-25"
+	},
+	{
+		"id": "65612623-d059-470a-8a65-649d30195c47",
+		"title": "Lunch at Work",
+		"category": "Food",
+		"amount": 8.99,
+		"date": "2023-07-15"
+	},
+	{
+		"id": "6c9da255-af29-409d-b6b6-88c792c8b81c",
+		"title": "Mobile Phone",
+		"category": "Utilities",
+		"amount": 65.0,
+		"date": "2023-07-28"
+	},
+	{
+		"id": "3686302c-feea-4e98-8930-f1ab03d1ee27",
+		"title": "Rent",
+		"category": "Housing",
+		"amount": 1500.0,
+		"date": "2023-07-01"
+	},
+	{
+		"id": "b24f11fa-a244-4d03-99a9-4b8a39b9fbcd",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 42.13,
+		"date": "2023-08-17"
+	},
+	{
+		"id": "44844577-8ea0-43ca-8e98-2e156ac04171",
+		"title": "Safeway",
+		"category": "Grocery",
+		"amount": 89.42,
+		"date": "2023-08-21"
+	},
+	{
+		"id": "b53d7c88-7ebc-4a9c-863f-ae3e5a8215ef",
+		"title": "Rent",
+		"category": "Housing",
+		"amount": 1000.0,
+		"date": "2023-08-01"
+	},
+	{
+		"id": "32032776-ad64-49a6-a83d-835d8bd859b6",
+		"title": "Gym Membership",
+		"category": "Fitness",
+		"amount": 45.0,
+		"date": "2023-08-12"
+	},
+	{
+		"id": "79c8a4bb-72b2-4d66-9658-e761ef3c4ecc",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 15.0,
+		"date": "2023-08-10"
+	},
+	{
+		"id": "75651020-666f-4186-9f7c-49955b28a50b",
+		"title": "Utilities",
+		"category": "Bills",
+		"amount": 150.0,
+		"date": "2023-08-15"
+	},
+	{
+		"id": "f57668fc-a7de-4afe-8d0d-a22fcb18aced",
+		"title": "Bar Night",
+		"category": "Food & Drink",
+		"amount": 80.0,
+		"date": "2023-08-24"
+	},
+	{
+		"id": "a51e9be8-2611-49bc-aaa9-92083c5a8bb0",
+		"title": "Auto Insurance",
+		"category": "Insurance",
+		"amount": 75.0,
+		"date": "2023-08-05"
+	},
+	{
+		"id": "265af20d-80ba-4822-86cd-1ebbfa1dbfdc",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 50.0,
+		"date": "2023-08-29"
+	},
+	{
+		"id": "e0213eeb-83d8-4b02-9754-14b7b746f598",
+		"title": "Apple Store",
+		"category": "Technology",
+		"amount": 999.99,
+		"date": "2023-08-12"
+	},
+	{
+		"id": "49899f1c-7336-4818-beef-ad30c60bc917",
+		"title": "Home Depot",
+		"category": "Home",
+		"amount": 200.0,
+		"date": "2023-08-07"
+	},
+	{
+		"id": "93e987db-d053-4bd2-9c4a-bec056d1c0d9",
+		"title": "Spotify",
+		"category": "Entertainment",
+		"amount": 10.0,
+		"date": "2023-08-10"
+	},
+	{
+		"id": "a0dc8b54-3cc4-4832-8c2a-81fdf408e830",
+		"title": "Lunch Meeting",
+		"category": "Food & Drink",
+		"amount": 35.82,
+		"date": "2023-08-15"
+	},
+	{
+		"id": "662afe73-65eb-4c9b-b4fd-bcca995272dd",
+		"title": "Movie Night",
+		"category": "Entertainment",
+		"amount": 30.99,
+		"date": "2023-08-19"
+	},
+	{
+		"id": "c0228091-8c36-450e-81ad-230ce388848c",
+		"title": "Coffee Shop",
+		"category": "Food & Drink",
+		"amount": 4.5,
+		"date": "2023-08-17"
+	},
+	{
+		"id": "4f7ddcdf-29a9-41c2-b034-10a9ddbd9f10",
+		"title": "Department Store",
+		"category": "Shopping",
+		"amount": 100.0,
+		"date": "2023-08-22"
+	},
+	{
+		"id": "d21b8f4e-7082-4bf6-ba9b-d12ff99a9d08",
+		"title": "Bicycle Shop",
+		"category": "Transportation",
+		"amount": 200.0,
+		"date": "2023-08-28"
+	},
+	{
+		"id": "a379cb1b-45bb-4d35-a14b-f70982cb0306",
+		"title": "Dinner with Friends",
+		"category": "Food & Drink",
+		"amount": 60.0,
+		"date": "2023-08-31"
+	},
+	{
+		"id": "6d1a4700-d75c-422c-9c78-ed51f2e95f8f",
+		"title": "Parking Meter",
+		"category": "Transportation",
+		"amount": 8.56,
+		"date": "2023-08-16"
+	},
+	{
+		"id": "eed83595-0301-477f-81fb-4a528e932bdf",
+		"title": "Music Festival",
+		"category": "Entertainment",
+		"amount": 200.0,
+		"date": "2023-08-25"
+	},
+	{
+		"id": "22eb32d1-78fe-4111-95cb-cbbf2fa26373",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 42.13,
+		"date": "2023-08-17"
+	},
+	{
+		"id": "fd82f3c0-f903-4898-8f4d-80146561070d",
+		"title": "Safeway",
+		"category": "Grocery",
+		"amount": 89.42,
+		"date": "2023-08-21"
+	},
+	{
+		"id": "57f01ce3-be1a-4fce-a998-397861acea85",
+		"title": "Rent",
+		"category": "Housing",
+		"amount": 1000.0,
+		"date": "2023-08-01"
+	},
+	{
+		"id": "ffb3838c-676e-4c67-9f81-8817ec5abea4",
+		"title": "Gym Membership",
+		"category": "Fitness",
+		"amount": 45.0,
+		"date": "2023-08-12"
+	},
+	{
+		"id": "2ae1ac85-517e-404f-8dfb-af8d757474e2",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 15.0,
+		"date": "2023-08-10"
+	},
+	{
+		"id": "a2c14351-8cd5-41c1-8a98-1d0eaedcb707",
+		"title": "Utilities",
+		"category": "Bills",
+		"amount": 150.0,
+		"date": "2023-08-15"
+	},
+	{
+		"id": "7721c80f-f6f4-4784-a8a6-d9d237864c20",
+		"title": "Bar Night",
+		"category": "Food & Drink",
+		"amount": 80.0,
+		"date": "2023-08-24"
+	},
+	{
+		"id": "c0bc73bd-fa3d-4988-95e3-6b8ae49b5468",
+		"title": "Auto Insurance",
+		"category": "Insurance",
+		"amount": 75.0,
+		"date": "2023-08-05"
+	},
+	{
+		"id": "07b3a2be-b566-4c55-a692-a7dff3125a33",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 50.0,
+		"date": "2023-08-29"
+	},
+	{
+		"id": "3a5875ce-615d-4434-acac-b032dc432c93",
+		"title": "iMac",
+		"category": "Technology",
+		"amount": 999.99,
+		"date": "2023-08-12"
+	},
+	{
+		"id": "1e3d6dc7-e208-4d00-a935-642e70d3696c",
+		"title": "Home Depot",
+		"category": "Home",
+		"amount": 200.0,
+		"date": "2023-08-07"
+	},
+	{
+		"id": "87b0e361-cb29-4517-9165-a4f9ff758f19",
+		"title": "Spotify",
+		"category": "Entertainment",
+		"amount": 10.0,
+		"date": "2023-08-10"
+	},
+	{
+		"id": "07edfe9a-1ce1-4d6a-900b-197334536dc4",
+		"title": "Lunch Meeting",
+		"category": "Food & Drink",
+		"amount": 35.0,
+		"date": "2023-08-15"
+	},
+	{
+		"id": "1e0cf365-6068-4377-a7e9-b099ed765925",
+		"title": "Movie Night",
+		"category": "Entertainment",
+		"amount": 30.0,
+		"date": "2023-08-19"
+	},
+	{
+		"id": "0f40c897-3cdf-46cb-a073-ae9bf0041570",
+		"title": "Coffee Shop",
+		"category": "Food & Drink",
+		"amount": 4.5,
+		"date": "2023-08-17"
+	},
+	{
+		"id": "3da6b194-6551-4298-9490-c970f7ac2eda",
+		"title": "Department Store",
+		"category": "Shopping",
+		"amount": 100.0,
+		"date": "2023-08-22"
+	},
+	{
+		"id": "80e37e4e-f40d-46a4-97bd-0c46c0406d1d",
+		"title": "Bicycle Shop",
+		"category": "Transportation",
+		"amount": 200.0,
+		"date": "2023-08-28"
+	},
+	{
+		"id": "68ce08ed-8937-46b5-abce-2c7ea2a3a14a",
+		"title": "Dinner with Friends",
+		"category": "Food & Drink",
+		"amount": 60.0,
+		"date": "2023-08-31"
+	},
+	{
+		"id": "3e69ad64-59bf-433b-a08d-e7998b64d274",
+		"title": "Parking Meter",
+		"category": "Transportation",
+		"amount": 8.0,
+		"date": "2023-08-16"
+	},
+	{
+		"id": "0cd05522-729f-49f1-85bc-21cb0d111226",
+		"title": "Music Festival",
+		"category": "Entertainment",
+		"amount": 200.0,
+		"date": "2023-08-25"
+	},
+	{
+		"id": "ee884652-732a-4559-a1fc-763712b6aea7",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 4.75,
+		"date": "2023-09-01"
+	},
+	{
+		"id": "a2b417f4-5fab-4868-bd57-b0df4c4d8ac2",
+		"title": "Gas",
+		"category": "Transportation",
+		"amount": 30.4,
+		"date": "2023-09-02"
+	},
+	{
+		"id": "a7e232d7-f11c-4b0e-95ea-5390c5c1cc51",
+		"title": "Grocery shopping",
+		"category": "Food",
+		"amount": 125.0,
+		"date": "2023-09-03"
+	},
+	{
+		"id": "26bcad86-f71b-4c07-8438-d24a12dceebd",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 14.99,
+		"date": "2023-09-10"
+	},
+	{
+		"id": "ddcba5ff-2a45-4262-9471-546168ed35ce",
+		"title": "Clothing",
+		"category": "Personal",
+		"amount": 55.0,
+		"date": "2023-09-15"
+	},
+	{
+		"id": "0df7d095-b747-40d9-866d-dc03f843aff1",
+		"title": "Amazon",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-09-17"
+	},
+	{
+		"id": "05cdae72-a511-4955-9bc9-08c4eaccbdf4",
+		"title": "Restaurant",
+		"category": "Food",
+		"amount": 32.5,
+		"date": "2023-09-18"
+	},
+	{
+		"id": "90d13f3c-4f83-4ac8-8077-8d91a806b98c",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 20.0,
+		"date": "2023-09-20"
+	},
+	{
+		"id": "d3465ede-4f03-4330-9017-889292798d59",
+		"title": "Adele Concert tickets",
+		"category": "Entertainment",
+		"amount": 120.0,
+		"date": "2023-09-25"
+	},
+	{
+		"id": "d7f27f44-296c-4421-8ff1-e77911bd7806",
+		"title": "Gym membership",
+		"category": "Fitness",
+		"amount": 50.0,
+		"date": "2023-09-30"
+	},
+	{
+		"id": "7fada2ea-f7df-4862-940f-e1ad18cc8cf2",
+		"title": "Parking",
+		"category": "Transportation",
+		"amount": 15.0,
+		"date": "2023-09-30"
+	},
+	{
+		"id": "20aa72a6-65bd-4ce5-82f7-628ff5714b07",
+		"title": "Bookstore",
+		"category": "Shopping",
+		"amount": 35.0,
+		"date": "2023-09-30"
+	},
+	{
+		"id": "d67ab4c7-74b3-4a70-b720-664a66584cdf",
+		"title": "Movie Theater",
+		"category": "Entertainment",
+		"amount": 19.0,
+		"date": "2023-10-02"
+	},
+	{
+		"id": "ce42afc6-eef7-46b8-90dc-22c9b6492b35",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 40.0,
+		"date": "2023-10-06"
+	},
+	{
+		"id": "dc1ead5d-5cbb-4dd7-8237-017de36e74c8",
+		"title": "Haircut",
+		"category": "Personal Care",
+		"amount": 30.0,
+		"date": "2023-10-08"
+	},
+	{
+		"id": "52d1a45a-b39b-4e5d-9f78-8abc89377538",
+		"title": "Grocery Store",
+		"category": "Food",
+		"amount": 150.0,
+		"date": "2023-10-10"
+	},
+	{
+		"id": "ab5b71c8-af13-4392-851e-c5e11366b0f1",
+		"title": "Car Maintenance",
+		"category": "Transportation",
+		"amount": 200.0,
+		"date": "2023-10-12"
+	},
+	{
+		"id": "22a70a1b-6f93-4c54-83a7-bef03206b9ba",
+		"title": "Netflix",
+		"category": "Subscription",
+		"amount": 12.99,
+		"date": "2023-10-15"
+	},
+	{
+		"id": "d1419fc5-cb74-4c5b-9cf3-9740d53d6174",
+		"title": "Bars",
+		"category": "Entertainment",
+		"amount": 50.0,
+		"date": "2023-10-17"
+	},
+	{
+		"id": "b5abface-086d-4451-93fc-1099efa39359",
+		"title": "Clothing Store",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-10-20"
+	},
+	{
+		"id": "0b04cef3-41fa-4fd2-a91d-5901c090f679",
+		"title": "Restaurant",
+		"category": "Food",
+		"amount": 35.0,
+		"date": "2023-10-23"
+	},
+	{
+		"id": "eb2d5e97-409a-4a72-9351-30938eb223d6",
+		"title": "Electric Bill",
+		"category": "Utilities",
+		"amount": 100.0,
+		"date": "2023-10-28"
+	},
+	{
+		"id": "8da49dfc-6ed9-4a0e-b7cd-06e7a9700d75",
+		"title": "Laundromat",
+		"category": "Household",
+		"amount": 20.0,
+		"date": "2023-10-30"
+	},
+	{
+		"id": "4b5fae84-86ac-4a3a-a18c-33b60cbcf0fc",
+		"title": "Gym",
+		"category": "Fitness",
+		"amount": 40.0,
+		"date": "2023-10-31"
+	},
+	{
+		"id": "ff44b560-8414-4ba0-8255-7ed543537117",
+		"title": "Grocery Store",
+		"category": "Food",
+		"amount": 140.23,
+		"date": "2023-11-01"
+	},
+	{
+		"id": "e775be82-5ed6-4416-b8ad-768cb9b3584c",
+		"title": "Subway",
+		"category": "Food",
+		"amount": 9.67,
+		"date": "2023-11-02"
+	},
+	{
+		"id": "335026ff-4d9d-4de6-aabd-481337fc7c14",
+		"title": "Gas Station",
+		"category": "Transportation",
+		"amount": 50.2,
+		"date": "2023-11-03"
+	},
+	{
+		"id": "f7472c5e-231f-4d3e-8462-8236c80f3a4d",
+		"title": "Chipotle",
+		"category": "Food",
+		"amount": 14.36,
+		"date": "2023-11-04"
+	},
+	{
+		"id": "78238128-0831-481e-a6a1-eeaba01ac668",
+		"title": "Department Store",
+		"category": "Shopping",
+		"amount": 65.1,
+		"date": "2023-11-05"
+	},
+	{
+		"id": "90617cea-a736-4f25-aad6-aa8fca7e3016",
+		"title": "Target",
+		"category": "Shopping",
+		"amount": 29.0,
+		"date": "2023-11-06"
+	},
+	{
+		"id": "82c9beb6-bc30-41a6-ae93-54404bd410d8",
+		"title": "Starbucks",
+		"category": "Food",
+		"amount": 5.4,
+		"date": "2023-11-07"
+	},
+	{
+		"id": "e4f78d44-7f6d-4b9d-903d-049bf5305dd4",
+		"title": "Parking",
+		"category": "Transportation",
+		"amount": 8.0,
+		"date": "2023-11-08"
+	},
+	{
+		"id": "015b6a84-b9a5-4554-b969-f56e9be3aa62",
+		"title": "Pizza Place",
+		"category": "Food",
+		"amount": 19.75,
+		"date": "2023-11-09"
+	},
+	{
+		"id": "5ca9baa1-7c95-4037-905f-f6cd87378698",
+		"title": "Movie Theater",
+		"category": "Entertainment",
+		"amount": 30.0,
+		"date": "2023-11-10"
+	},
+	{
+		"id": "fac4c221-9f49-4b50-93b2-b573c0923e6d",
+		"title": "Netflix",
+		"category": "Entertainment",
+		"amount": 15.99,
+		"date": "2023-11-11"
+	},
+	{
+		"id": "e0eb717f-4274-4398-9e64-21a3351f4c74",
+		"title": "Spotify",
+		"category": "Entertainment",
+		"amount": 9.99,
+		"date": "2023-11-12"
+	},
+	{
+		"id": "0b06efda-449d-4eba-b3ba-bad0d3a31e7f",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 32.5,
+		"date": "2023-11-13"
+	},
+	{
+		"id": "17e9766a-79d0-4367-a64b-c194ba736e0c",
+		"title": "Pharmacy",
+		"category": "Health",
+		"amount": 43.0,
+		"date": "2023-11-14"
+	},
+	{
+		"id": "aa2dda4c-fb42-4340-9a4c-88cde79596ca",
+		"title": "Coffee Shop",
+		"category": "Food",
+		"amount": 3.5,
+		"date": "2023-11-15"
+	},
+	{
+		"id": "e4d93489-d718-42cb-ab80-a8f4301bbcc4",
+		"title": "Bookstore",
+		"category": "Shopping",
+		"amount": 25.0,
+		"date": "2023-11-16"
+	},
+	{
+		"id": "44693b6e-9fe8-4686-8c03-a9ab973f9d3f",
+		"title": "Pet Store",
+		"category": "Other",
+		"amount": 50.0,
+		"date": "2023-11-17"
+	},
+	{
+		"id": "5f24c6f5-ed27-44fb-88e3-34a21f8b018c",
+		"title": "Gym",
+		"category": "Health",
+		"amount": 40.0,
+		"date": "2023-11-18"
+	},
+	{
+		"id": "447a2a78-4c6a-40f0-b4c7-27340a9530ab",
+		"title": "Laundromat",
+		"category": "Other",
+		"amount": 15.0,
+		"date": "2023-11-19"
+	},
+	{
+		"id": "5e71b5bb-0f6f-4c6b-8aa3-101a8dd2feb0",
+		"title": "Clothing",
+		"category": "Shopping",
+		"amount": 75.0,
+		"date": "2023-11-20"
+	},
+	{
+		"id": "b6e8bb44-d8f6-4901-b7b2-3ae9093bcb12",
+		"title": "Grocery Shopping",
+		"category": "Food",
+		"amount": 97.75,
+		"date": "2023-12-03"
+	},
+	{
+		"id": "e83ea3f4-150f-428a-a069-c2b48bab03a1",
+		"title": "Holiday Party",
+		"category": "Entertainment",
+		"amount": 250.0,
+		"date": "2023-12-12"
+	},
+	{
+		"id": "00e4e9d2-759a-4f68-8b3a-ca87f14d8526",
+		"title": "Gift Shopping",
+		"category": "Shopping",
+		"amount": 150.0,
+		"date": "2023-12-15"
+	},
+	{
+		"id": "b4090a7b-83da-45ea-bf73-9f86035a871d",
+		"title": "Winter Coat",
+		"category": "Clothing",
+		"amount": 85.5,
+		"date": "2023-12-20"
+	},
+	{
+		"id": "43121413-85a3-497a-9f28-b81bedb6106c",
+		"title": "Holiday Decorations",
+		"category": "Home",
+		"amount": 35.0,
+		"date": "2023-12-22"
+	},
+	{
+		"id": "27ac43ba-7b8c-400c-a5b3-63f8d7d96b64",
+		"title": "Netflix",
+		"category": "Subscription",
+		"amount": 15.99,
+		"date": "2023-12-10"
+	},
+	{
+		"id": "a6343b37-0497-4247-a310-f94a566cf577",
+		"title": "Spotify",
+		"category": "Subscription",
+		"amount": 9.99,
+		"date": "2023-12-12"
+	},
+	{
+		"id": "7ae348ae-463e-4f46-a479-9f94be6693e0",
+		"title": "Amazon Prime",
+		"category": "Subscription",
+		"amount": 12.99,
+		"date": "2023-12-15"
+	},
+	{
+		"id": "f4f92aba-a59a-495d-9fdf-c431c93bbe43",
+		"title": "Uber",
+		"category": "Transportation",
+		"amount": 45.0,
+		"date": "2023-12-25"
+	},
+	{
+		"id": "83406536-5928-4e5a-aa6e-13751fd84efe",
+		"title": "Takeout Dinner",
+		"category": "Food",
+		"amount": 25.0,
+		"date": "2023-12-31"
+	},
+	{
+		"id": "bc18e3b0-b902-4e46-8136-a24b3353a3e1",
+		"title": "Ski Trip",
+		"category": "Travel",
+		"amount": 500.0,
+		"date": "2023-12-28"
+	},
+	{
+		"id": "4d62628b-4531-4672-af79-302ef181fb19",
+		"title": "Snowboarding Lesson",
+		"category": "Entertainment",
+		"amount": 75.0,
+		"date": "2023-12-30"
+	}
+]
