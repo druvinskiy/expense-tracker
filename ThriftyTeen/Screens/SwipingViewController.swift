@@ -22,19 +22,22 @@ class SwipingViewController: UIViewController {
     
     var shouldScroll = true
     
-    let allExpenses: [Expense]
-    let expensesByWeek: [WeekExpenseRange]
-    let expensesByMonth: [Int: [Expense]]
+    var allExpenses: [Expense]
+    var expensesByWeek: [WeekExpenseRange]
+    var expensesByMonth: [Int: [Expense]]
     var month: Int
     var week: Int
     let year: Int
     
     lazy var mode = Mode.month
     
-    init(allExpenses: [Expense], yearNumber: Int, monthNumber: Int) {
+    let yearsVCDelegate: YearsViewControllerDelegate
+    
+    init(allExpenses: [Expense], yearNumber: Int, monthNumber: Int, yearsVCDelegate: YearsViewControllerDelegate) {
         self.allExpenses = allExpenses
         self.month = monthNumber
         self.year = yearNumber
+        self.yearsVCDelegate = yearsVCDelegate
         
         self.week = ExpensesHelper.firstWeekNumber(year: yearNumber, month: monthNumber)
         self.expensesByWeek = ExpensesHelper.getExpensesByWeek(allExpenses, year: yearNumber)
@@ -65,14 +68,13 @@ class SwipingViewController: UIViewController {
     }()
     
     lazy var calendarButton: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 32.0, weight: .regular)
-        let plusImage = UIImage(systemName: "calendar.circle.fill", withConfiguration: configuration)?
-            .withTintColor(.label, renderingMode: .alwaysOriginal)
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .deepForestGreen
+        configuration.baseForegroundColor = .white
+        configuration.image = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular))
         
-        var plusConfiguration = UIButton.Configuration.borderless()
-        plusConfiguration.image = plusImage
-        
-        let actionButton = UIButton(configuration: plusConfiguration)
+        let actionButton = UIButton(configuration: configuration)
         
         let add = UIAction(title: "Month") { (action) in
             self.mode = .month
@@ -226,6 +228,8 @@ class SwipingViewController: UIViewController {
             
             calendarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             calendarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            calendarButton.widthAnchor.constraint(equalToConstant: 50),
+            calendarButton.heightAnchor.constraint(equalToConstant: 50),
             
             rightArrow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             rightArrow.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
@@ -233,6 +237,15 @@ class SwipingViewController: UIViewController {
             leftArrow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             leftArrow.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
         ])
+    }
+    
+    func dataUpdated(expenses: [Expense]) {
+        self.allExpenses = expenses
+        self.expensesByWeek = ExpensesHelper.getExpensesByWeek(allExpenses, year: year)
+        self.expensesByMonth = ExpensesHelper.getExpensesByMonth(for: allExpenses)
+        
+        collectionView.reloadData()
+        
     }
 }
 
@@ -255,7 +268,7 @@ extension SwipingViewController: UICollectionViewDelegate, UICollectionViewDataS
         case .month:
             let monthNumber = indexPath.row + 1
             let expensesForMonth = expensesByMonth[monthNumber]!
-            innerVC = MonthExpensesListViewController(expenses: expensesForMonth, month: monthNumber)
+            innerVC = MonthExpensesListViewController(expenses: expensesForMonth, month: monthNumber, yearsVCDelegate: yearsVCDelegate)
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCell.reuseID, for: indexPath) as! PageCell

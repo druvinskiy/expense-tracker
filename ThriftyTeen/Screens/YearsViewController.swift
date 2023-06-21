@@ -7,42 +7,34 @@
 
 import SwiftUI
 
+protocol YearsViewControllerDelegate {
+    func updateData(originalExpense: Expense, updatedExpense: Expense)
+}
+
 class YearsViewController: UIViewController {
     lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionView.createTwoColumnFlowLayout(in: view))
+    lazy var networkingViewManager = NetworkingViewsManager(parentViewController: navigationController!)
+    
+    lazy var addButtonArrowImageView = AddButtonArrowImageView(primaryAction:  UIAction(handler: {_ in
+        let formVC = UIHostingController(rootView: AddExpenseForm() {
+            self.dismiss(animated: true)
+        })
+        formVC.modalPresentationStyle = .fullScreen
+        self.present(formVC, animated: true)
+    }))
+    
+    var monthsVC: MonthsViewController?
     
     var expenses = [Expense]()
     var expenseYears = [Int]()
     var expensesByYear = [Int: [Expense]]()
-    
-    lazy var addButton: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 36.0, weight: .regular)
-        let plusImage = UIImage(systemName: "plus.circle.fill", withConfiguration: configuration)?
-            .withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
-        
-        var plusConfiguration = UIButton.Configuration.borderless()
-        plusConfiguration.image = plusImage
-        
-        let actionButton = UIButton(configuration: plusConfiguration, primaryAction: UIAction(handler: {_ in
-            let formVC = UIHostingController(rootView: AddExpenseForm() {
-                self.dismiss(animated: true)
-                self.getExpenses()
-            })
-            formVC.modalPresentationStyle = .overFullScreen
-            self.present(formVC, animated: true)
-        }))
-        
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return actionButton
-    }()
+    var selectedYear: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureCollectionView()
-        configureViewController()
-        
-        getExpenses()
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,40 +43,54 @@ class YearsViewController: UIViewController {
         getExpenses()
     }
     
-    func configureViewController() {
-        navigationItem.title = NSLocalizedString("years-view.navigation-item.title", comment: "")
-        view.backgroundColor = .systemBackground
-        
-        view.addSubview(addButton)
-        
-        NSLayoutConstraint.activate([
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-    
     func configureCollectionView() {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .systemBackground
         collectionView.register(YearCell.self, forCellWithReuseIdentifier: YearCell.reuseID)
     }
     
+    func configureUI() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.addSubview(addButtonArrowImageView)
+        
+        NSLayoutConstraint.activate([
+            addButtonArrowImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            addButtonArrowImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+    
     func getExpenses() {
+        networkingViewManager.showLoadingView()
+        
         NetworkManager.shared.fetchExpenses { result in
-            switch result {
-            case .success(let expenses):
-                self.expenses = expenses
-                self.expenseYears = ExpensesHelper.getExpenseYears(expenses)
-                self.expensesByYear = ExpensesHelper.getExpensesByYear(expenses)
-
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.networkingViewManager.dismissLoadingView()
+                
+                switch result {
+                case .success(let expenses):
+                    self.updateUI(with: expenses)
+                case .failure(_):
+                    break
                 }
-            case .failure(_):
-                break
             }
+        }
+    }
+    
+    func updateUI(with expenses: [Expense]) {
+        self.expenses = expenses
+        expenseYears = ExpensesHelper.getExpenseYears(expenses)
+        expensesByYear = ExpensesHelper.getExpensesByYear(expenses)
+        collectionView.reloadData()
+        
+        if expenses.isEmpty { // move this to Array extension
+            networkingViewManager.showEmptyStateView(emptyState: .noExpensesAtAll)
+            addButtonArrowImageView.showTrainingAffordance()
+            navigationItem.title = ""
+        } else {
+            networkingViewManager.dismissEmptyStateView()
+            addButtonArrowImageView.hideTrainingAffordance()
+            navigationItem.title = String(localized: "years-view.navigation-item.title") // change this to be more descriptive
         }
     }
 }
@@ -105,10 +111,28 @@ extension YearsViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let year = expenseYears[indexPath.row]
-        let filteredExpenses = expensesByYear[year]!
+        selectedYear = expenseYears[indexPath.row]
+        let filteredExpenses = expensesByYear[selectedYear!]!
         
-        let monthsVC = MonthsViewController(year: year, expenses: filteredExpenses)
-        navigationController?.pushViewController(monthsVC, animated: true)
+        monthsVC = MonthsViewController(year: selectedYear!, expenses: filteredExpenses, yearsVCDelegate: self)
+        navigationController?.pushViewController(monthsVC!, animated: true)
+    }
+}
+
+extension YearsViewController: YearsViewControllerDelegate {
+    func updateData(originalExpense: Expense, updatedExpense: Expense) {
+        NetworkManager.shared.fetchExpenses { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let expenses):
+                    let expensesByYear = ExpensesHelper.getExpensesByYear(expenses)
+                    let filteredExpenses = expensesByYear[self.selectedYear!] ?? []
+                    
+                    self.monthsVC?.dataUpdated(expenses: filteredExpenses)
+                case .failure(_):
+                    break
+                }
+            }
+        }
     }
 }

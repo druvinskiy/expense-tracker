@@ -10,12 +10,16 @@ import UIKit
 class MonthsViewController: UIViewController {
     lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionView.createTwoColumnFlowLayout(in: view))
     
-    let year: Int
-    let expenses: [Expense]
+    var year: Int
+    var expenses: [Expense]
     
-    init(year: Int, expenses: [Expense]) {
+    let yearsVCDelegate: YearsViewControllerDelegate
+    var swipingVC: SwipingViewController?
+    
+    init(year: Int, expenses: [Expense], yearsVCDelegate: YearsViewControllerDelegate) {
         self.year = year
         self.expenses = expenses
+        self.yearsVCDelegate = yearsVCDelegate
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,6 +54,12 @@ class MonthsViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(MonthCell.self, forCellWithReuseIdentifier: MonthCell.reuseID)
     }
+    
+    func dataUpdated(expenses: [Expense]) {
+        self.expenses = expenses
+        collectionView.reloadData()
+        swipingVC?.dataUpdated(expenses: expenses)
+    }
 }
 
 extension MonthsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -69,9 +79,9 @@ extension MonthsViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let month = indexPath.row + 1
-        let swipingVC = SwipingViewController(allExpenses: expenses, yearNumber: year, monthNumber: month)
+        swipingVC = SwipingViewController(allExpenses: expenses, yearNumber: year, monthNumber: month, yearsVCDelegate: yearsVCDelegate)
         
-        swipingVC.modalPresentationStyle = .overFullScreen
-        present(swipingVC, animated: true)
+        swipingVC!.modalPresentationStyle = .overFullScreen
+        present(swipingVC!, animated: true)
     }
 }

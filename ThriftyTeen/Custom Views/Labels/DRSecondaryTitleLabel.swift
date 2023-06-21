@@ -24,7 +24,7 @@ class DRSecondaryTitleLabel: UILabel {
     }
     
     private func configure() {
-        textColor = .storm
+        textColor = .label
         adjustsFontForContentSizeCategory = true
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false

@@ -18,6 +18,7 @@ struct AddExpenseForm: View {
     private let currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        formatter.currencyCode = "USD"
         formatter.minimumFractionDigits = 0
         return formatter
     }()
@@ -29,7 +30,7 @@ struct AddExpenseForm: View {
                 
                 TextField("Amount", text: Binding(
                     get: {
-                        if let double = Double(amount), let formattedValue = currencyFormatter.string(from: NSNumber(value: double)) {
+                        if let decimal = Decimal(string: amount), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
                             return formattedValue
                         } else {
                             return self.amount
@@ -48,23 +49,30 @@ struct AddExpenseForm: View {
                 NavigationLink(destination: CategoriesListView(selectedCategory: $selectedCategory)
                     .navigationTitle("Categories")
                 ) {
-                    Text(selectedCategory != nil ? selectedCategory!.title : "Select category")
+                    if let selectedCategory = selectedCategory {
+                        HStack {
+                            Image(selectedCategory.iconName!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                            
+                            Text(selectedCategory.name!)
+                        }
+                    } else {
+                        Text("Select Category")
+                    }
                 }
                 
                 Button {
-                    guard let selectedCategory = selectedCategory else {
+                    guard let selectedCategory = selectedCategory,
+                          let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD")
+                    else {
                         return
                     }
                     
-                    var expense: ExpensePayload
+                    let user = KeychainManager.shared.signUp.user
                     
-                    if let double = Double(amount) {
-                        expense = ExpensePayload(title: title, category: selectedCategory, amount: double, date: date)
-                    } else if let number = currencyFormatter.number(from: amount) {
-                        expense = ExpensePayload(title: title, category: selectedCategory, amount: number.doubleValue, date: date)
-                    } else {
-                        return
-                    }
+                    let expense = WebExpense(user: user, category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date, id: nil)
                     
                     NetworkManager.shared.postExpense(expense: expense) { error in
                         DispatchQueue.main.async {
@@ -79,7 +87,7 @@ struct AddExpenseForm: View {
                         Spacer()
                     }
                     .padding(.vertical, 8)
-                    .background(Color.blue)
+                    .background(Color(UIColor.azureBlue))
                     .cornerRadius(5)
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -91,7 +99,7 @@ struct AddExpenseForm: View {
                 Image(systemName: "xmark")
                     .imageScale(.large)
                     .frame(width: 44, height: 44)
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
             })
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,13 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+//        KeychainManager.shared.delete(service: .bearerToken, account: .expenseTracker)
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let navigationController = UINavigationController(rootViewController: YearsViewController())
-        navigationController.navigationBar.prefersLargeTitles = true
+        if KeychainManager.shared.signUp != nil {
+            let navigationController = UINavigationController(rootViewController: YearsViewController())
+            navigationController.navigationBar.prefersLargeTitles = true
+            window?.rootViewController = navigationController
+        } else {
+            let formVC = UIHostingController(rootView: AccountForm())
+            window?.rootViewController = formVC
+        }
         
-        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

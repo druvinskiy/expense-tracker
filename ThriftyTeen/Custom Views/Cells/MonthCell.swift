@@ -23,7 +23,7 @@ class MonthCell: UICollectionViewCell {
         formatter.numberStyle = .currency
         formatter.currencyCode = "USD"
         
-        amountLabel.text = formatter.string(from: NSNumber(value: ExpensesHelper.calculateTotalSpent(expenses)))
+        amountLabel.text = formatter.string(from: NSDecimalNumber(decimal: ExpensesHelper.calculateTotalSpent(expenses)))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
@@ -35,7 +35,7 @@ class MonthCell: UICollectionViewCell {
     }
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = .azureBlue
         
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true

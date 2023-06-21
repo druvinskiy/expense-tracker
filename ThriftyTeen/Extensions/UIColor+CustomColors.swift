@@ -8,9 +8,16 @@
 import UIKit
 
 extension UIColor {
-    static let bajaBlast = UIColor(named: "bajaBlast")!
-    static let radical = UIColor(named: "radical")!
-    static let zircon = UIColor(named: "Zircon")!
-    static let storm = UIColor(named: "Storm")!
-    static let expenseCellColor = UIColor(named: "ExpenseCellColor")!
+    static let amberGold = UIColor(named: "amberGold")!
+    static let azureBlue = UIColor(named: "azureBlue")!
+    static let deepForestGreen = UIColor(named: "deepForestGreen")!
+    static let fuchsiaPink = UIColor(named: "fuchsiaPink")!
+    static let mistyBlue = UIColor(named: "mistyBlue")!
+    static let mossyOlive = UIColor(named: "mossyOlive")!
+    static let rustyBrown = UIColor(named: "rustyBrown")!
+    static let scarletRed = UIColor(named: "scarletRed")!
+    static let skyBlue = UIColor(named: "skyBlue")!
+    static let slateGray = UIColor(named: "slateGray")!
+    static let smokyCharcoal = UIColor(named: "smokyCharcoal")!
+    static let vibrantGreen = UIColor(named: "vibrantGreen")!
 }

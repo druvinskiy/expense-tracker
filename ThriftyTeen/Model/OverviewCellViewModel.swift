@@ -10,5 +10,5 @@ import UIKit
 struct OverviewCellViewModel {
     let title: String
     let subtitle: String
-    let hasIcon: Bool
+    let iconName: String?
 }

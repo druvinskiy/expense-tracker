@@ -15,15 +15,15 @@ enum ExpensesHelper {
         return calendar
     }()
     
-    static func findMostSpentCategory(_ expenses: [Expense]) -> String {
-        var categorySpendings = [String: Double]()
+    static func findMostSpentCategory(_ expenses: [Expense]) -> Category {
+        var categorySpendings = [Category: Decimal]()
         
         for expense in expenses {
-            categorySpendings[expense.category.title] = categorySpendings[expense.category.title, default: 0] + expense.amount
+            categorySpendings[expense.category] = categorySpendings[expense.category, default: 0] + expense.amount
         }
         
-        var mostSpentCategory = ""
-        var mostSpentAmount = 0.0
+        var mostSpentCategory = expenses.first!.category
+        var mostSpentAmount: Decimal = 0.0
         
         for (category, amount) in categorySpendings {
             if (amount > mostSpentAmount) {
@@ -35,12 +35,12 @@ enum ExpensesHelper {
         return mostSpentCategory
     }
     
-    static func calculateTotalSpent(_ expenses: [Expense]) -> Double {
+    static func calculateTotalSpent(_ expenses: [Expense]) -> Decimal {
         return expenses.reduce(0.0) { $0 + $1.amount }
     }
     
     static func getExpenseYears(_ expenses: [Expense]) -> [Int] {
-        let years = expenses.map { calendar.component(.year, from: $0.date) }
+        let years = expenses.map { calendar.component(.year, from: $0.dateCreated) }
         let yearsSet = Set(years)
         
         return Array(yearsSet).sorted { $0 > $1 }
@@ -48,7 +48,7 @@ enum ExpensesHelper {
     
     static func getExpensesByYear(_ expenses: [Expense]) -> [Int: [Expense]] {
         return expenses.reduce(into: [Int: [Expense]]()) { result, expense in
-            let year = calendar.component(.year, from: expense.date)
+            let year = calendar.component(.year, from: expense.dateCreated)
             result[year, default: []].append(expense)
         }
     }
@@ -81,7 +81,7 @@ enum ExpensesHelper {
         }
         
         for expense in expenses {
-            let weekNumber = adjustedWeekNumber(date: expense.date)
+            let weekNumber = adjustedWeekNumber(date: expense.dateCreated)
             weekRanges[weekNumber]?.expenses.append(expense)
         }
         
@@ -134,7 +134,7 @@ enum ExpensesHelper {
         }
         
         for expense in expenses {
-            let weekNumber = calendar.component(.weekOfMonth, from: expense.date)
+            let weekNumber = calendar.component(.weekOfMonth, from: expense.dateCreated)
             weekRanges[weekNumber]?.expenses.append(expense)
         }
         
@@ -151,7 +151,7 @@ enum ExpensesHelper {
         }
         
         return expenses.reduce(into: initialDict) { dict, expense in
-            let monthNumber = calendar.component(.month, from: expense.date)
+            let monthNumber = calendar.component(.month, from: expense.dateCreated)
             dict[monthNumber]?.append(expense)
         }
     }

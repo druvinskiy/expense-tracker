@@ -10,9 +10,9 @@ import UIKit
 class ExpenseCell: UICollectionViewCell {
     static let reuseID = "ExpenseCell"
     
-    let titleLabel = DRTitleLabel(textAlignment: .left, fontSize: 18, weight: .bold)
-    let categoryLabel = DRSecondaryTitleLabel(fontSize: 14)
-    let amountLabel = DRSecondaryTitleLabel(fontSize: 16)
+    let titleLabel = DRTitleLabel(textAlignment: .left, fontSize: 18, weight: .bold, textColor: .label)
+    let categoryLabel = DRTitleLabel(textAlignment: .left, fontSize: 14, weight: .regular, textColor: .label)
+    let amountLabel = DRTitleLabel(textAlignment: .left, fontSize: 14, weight: .regular, textColor: .label)
     
     private let shadowColor = UIColor.label.cgColor
     
@@ -23,17 +23,18 @@ class ExpenseCell: UICollectionViewCell {
     
     func set(expense: Expense) {
         titleLabel.text = expense.title
-        categoryLabel.text = expense.category.title.capitalized
+        categoryLabel.text = expense.category.name!.capitalized
         
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = "USD"
         
-        amountLabel.text = formatter.string(from: NSNumber(value: expense.amount))!
+        amountLabel.text = formatter.string(from: NSDecimalNumber(decimal: expense.amount))!
     }
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = .smokyCharcoal.withAlphaComponent(0.2)
+//        #colorLiteral(red: 0.7034259439, green: 0.6529470086, blue: 0.9137045741, alpha: 1)
         
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true

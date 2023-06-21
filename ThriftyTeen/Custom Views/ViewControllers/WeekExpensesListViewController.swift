@@ -37,7 +37,7 @@ class WeekExpensesListViewController: UIViewController {
     }
     
     func configureCollectionView() {
-        collectionView.backgroundColor = .zircon
+        collectionView.backgroundColor = .smokyCharcoal
         collectionView.register(ExpenseCell.self, forCellWithReuseIdentifier: ExpenseCell.reuseID)
         collectionView.delegate = self
         collectionView.dataSource = self

@@ -18,14 +18,14 @@ class DRTitleLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat, weight: UIFont.Weight) {
+    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat, weight: UIFont.Weight, textColor: UIColor = .white) {
         self.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        self.textColor = textColor
     }
     
     private func configure() {
-        textColor = .black
         numberOfLines = 0
         translatesAutoresizingMaskIntoConstraints = false
     }

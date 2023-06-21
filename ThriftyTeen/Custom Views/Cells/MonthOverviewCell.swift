@@ -25,11 +25,16 @@ class MonthOverviewCell: UICollectionViewCell {
         monthLabel.text = viewModel.title
         amountLabel.text = viewModel.subtitle
         
-        imageView.isHidden = !viewModel.hasIcon
+        guard let iconName = viewModel.iconName else {
+            imageView.isHidden = true
+            return
+        }
+        
+        imageView.image = UIImage(named: iconName)
     }
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = .azureBlue
         
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
@@ -41,12 +46,12 @@ class MonthOverviewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.10
         layer.shadowOffset = CGSize(width: 0, height: 5)
         
-        imageView.image = UIImage(named: "Shopping")
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 40),
-            imageView.widthAnchor.constraint(equalToConstant: 40)
+            imageView.widthAnchor.constraint(equalToConstant: 60)
         ])
         
         let stackView1 = UIStackView(arrangedSubviews: [amountLabel, imageView])
