@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CategoriesListView: View {
-    @Binding var selectedCategory: Category?
-    @State private var categories = [Category]()
     @State private var name = ""
     @State private var selectedIndex = 0
+    @Binding var categories: [Category]
+    @Environment(\.presentationMode) var presentationMode
     
     let columns: [GridItem] = [GridItem(.fixed(100)),
                                GridItem(.fixed(100)),
@@ -20,31 +20,6 @@ struct CategoriesListView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Select a category")) {
-                ForEach(categories) { category in
-                    Button {
-                        selectedCategory = category
-                    } label: {
-                        HStack(spacing: 12) {
-                            HStack {
-                                Image(category.iconName!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30, height: 30)
-                                
-                                Text(category.name!)
-                                    .foregroundColor(Color(.label))
-                            }
-                            Spacer()
-                            
-                            if selectedCategory == category {
-                                Image(systemName: "checkmark")
-                            }
-                        }
-                    }
-                }
-            }
-            
             Section(header: Text("Create a category")) {
                 TextField("Title", text: $name)
                 
@@ -78,12 +53,7 @@ struct CategoriesListView: View {
                 .frame(height: 260)
                 
                 Button {
-                    let user = KeychainManager.shared.signUp.user
-                    
-                    let category = Category(iconName: "Icon\(selectedIndex)", user: user, id: nil, name: name)
-                    NetworkManager.shared.postCategory(category: category) { error in
-                        getCategories()
-                    }
+                    postCategory()
                 } label: {
                     HStack {
                         Spacer()
@@ -98,19 +68,29 @@ struct CategoriesListView: View {
                 .buttonStyle(PlainButtonStyle())
             }
         }
-        .onAppear {
-            getCategories()
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    func postCategory() {
+        let user = KeychainManager.shared.signUp.user
+        
+        let category = Category(iconName: "Icon\(selectedIndex)", user: user, id: nil, name: name)
+        NetworkManager.shared.postCategory(category: category) { error in
+            fetchCategories()
         }
     }
     
-    func getCategories() {
+    func fetchCategories() {
         NetworkManager.shared.fetchCategories { result in
-            switch result {
-            case .success(let categories):
-                self.categories = categories
-                name = ""
-            case .failure(_):
-                break
+            DispatchQueue.main.async {
+                
+                switch result {
+                case .success(let categories):
+                    self.categories = categories
+                    self.presentationMode.wrappedValue.dismiss()
+                case .failure(_):
+                    break
+                }
             }
         }
     }

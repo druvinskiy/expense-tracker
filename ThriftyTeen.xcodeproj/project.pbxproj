@@ -205,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				63F0991B29B5956900B97BC2 /* WeekOverviewView.swift */,
-				63B191F829CE82B9008C010B /* CategoriesListView.swift */,
 				63805D572A23B3B300A4A082 /* EmptyStateView.swift */,
 				63F0881C2A3AA548008F6262 /* AddButtonArrowImageView.swift */,
 			);
@@ -253,6 +252,7 @@
 				639A131029B660920069E39E /* MonthsViewController.swift */,
 				63F0992D29B5973800B97BC2 /* SwipingViewController.swift */,
 				63AECEF129C95BD3005D5732 /* AddExpenseForm.swift */,
+				63B191F829CE82B9008C010B /* CategoriesListView.swift */,
 				632928BD2A3E62ED002EB729 /* UpdateExpenseForm.swift */,
 				632928BF2A3FE022002EB729 /* AccountForm.swift */,
 			);

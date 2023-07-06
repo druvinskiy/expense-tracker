@@ -12,6 +12,7 @@ struct UpdateExpenseForm: View {
     @State private var amount = ""
     @State private var date = Date()
     @State private var selectedCategory: Category?
+    @State private var categories = [Category]()
     
     var dismissAction: ((Expense?) -> Void)
     let expense: Expense
@@ -20,7 +21,8 @@ struct UpdateExpenseForm: View {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = "USD"
-//        formatter.minimumFractionDigits = 0
+        formatter.minimumFractionDigits = 0
+        formatter.usesGroupingSeparator = false
         return formatter
     }()
     
@@ -38,72 +40,90 @@ struct UpdateExpenseForm: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Title", text: $title)
-                
-                TextField("Amount", text: Binding(
-                    get: {
-                        if let decimal = Decimal(string: amount), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
-                            return formattedValue
-                        } else {
-                            return self.amount
+                Section(header: Text("General Information")) {
+                    TextField("Title", text: $title)
+                    
+                    TextField("Amount", text: Binding(
+                        get: {
+                            return amount
+                        },
+                        set: { newValue in
+                            if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
+                                amount = formattedValue
+                            } else {
+                                amount = newValue
+                            }
                         }
-                    },
-                    set: { newValue in
-                        self.amount = newValue
+                    ))
+                    .keyboardType(.decimalPad)
+                    
+                    DatePicker("Date",
+                               selection: $date,
+                               displayedComponents: .date)
+                }
+                
+                Section(header: Text("Category")) {
+                    ForEach(categories) { category in
+                        Button {
+                            selectedCategory = category
+                        } label: {
+                            HStack(spacing: 12) {
+                                HStack {
+                                    Image(category.iconName!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30, height: 30)
+                                    
+                                    Text(category.name!)
+                                        .foregroundColor(Color(.label))
+                                }
+                                Spacer()
+                                
+                                if selectedCategory == category {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
                     }
-                ))
-                .keyboardType(.decimalPad)
-                
-                DatePicker("Date",
-                           selection: $date,
-                           displayedComponents: .date)
-                
-                NavigationLink(destination: CategoriesListView(selectedCategory: $selectedCategory)
-                    .navigationTitle("Categories")
-                ) {
-                    if let selectedCategory = selectedCategory {
-                        HStack {
-                            Image(selectedCategory.iconName!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                            
-                            Text(selectedCategory.name!)
-                        }
-                    } else {
-                        Text("Select Category")
+                    .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+                    
+                    NavigationLink(destination: CategoriesListView(categories: $categories)) {
+                        Text("New Category")
                     }
                 }
-                VStack {
-                    Button {
-                        patchExpense()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Update")
-                                .foregroundColor(.white)
-                            Spacer()
+                
+                Section {
+                    VStack {
+                        Button {
+                            patchExpense()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Update")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.vertical, 8)
+                            .background(Color(UIColor.azureBlue))
+                            .cornerRadius(5)
                         }
-                        .padding(.vertical, 8)
-                        .background(Color(UIColor.azureBlue))
-                        .cornerRadius(5)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Button {
-                        deleteExpense()
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Delete")
-                                .foregroundColor(.white)
-                            Spacer()
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Button {
+                            deleteExpense()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Delete")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.vertical, 8)
+                            .background(Color(UIColor.scarletRed))
+                            .cornerRadius(5)
                         }
-                        .padding(.vertical, 8)
-                        .background(Color(UIColor.scarletRed))
-                        .cornerRadius(5)
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .navigationTitle("Update Expense")
@@ -115,6 +135,9 @@ struct UpdateExpenseForm: View {
                     .frame(width: 44, height: 44)
                     .foregroundColor(.primary)
             })
+        }
+        .onAppear {
+            fetchCategories()
         }
     }
     
@@ -144,6 +167,17 @@ struct UpdateExpenseForm: View {
         NetworkManager.shared.deleteExpense(expense: expense) { error in
             DispatchQueue.main.async {
                 self.dismissAction(expense)
+            }
+        }
+    }
+    
+    func fetchCategories() {
+        NetworkManager.shared.fetchCategories { result in
+            switch result {
+            case .success(let categories):
+                self.categories = categories
+            case .failure(_):
+                break
             }
         }
     }

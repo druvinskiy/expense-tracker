@@ -11,7 +11,9 @@ struct AddExpenseForm: View {
     @State private var title = ""
     @State private var amount = ""
     @State private var date = Date()
+    @State private var categories = [Category]()
     @State private var selectedCategory: Category?
+    @Environment(\.colorScheme) var colorScheme
     
     var dismissAction: (() -> Void)
     
@@ -26,71 +28,87 @@ struct AddExpenseForm: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Title", text: $title)
-                
-                TextField("Amount", text: Binding(
-                    get: {
-                        if let decimal = Decimal(string: amount), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
-                            return formattedValue
-                        } else {
-                            return self.amount
+                Section(header: Text("General information")) {
+                    TextField("Title", text: $title)
+                    
+                    TextField("Amount", text: Binding(
+                        get: {
+                            return amount
+                        },
+                        set: { newValue in
+                            if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
+                                amount = formattedValue
+                            } else {
+                                amount = newValue
+                            }
                         }
-                    },
-                    set: { newValue in
-                        self.amount = newValue
+                    ))
+                    .keyboardType(.decimalPad)
+                    
+                    DatePicker("Date",
+                               selection: $date,
+                               displayedComponents: .date)
+                }
+                
+                Section(header: Text("Category")) {
+                    ForEach(categories) { category in
+                        Button {
+                            selectedCategory = category
+                        } label: {
+                            HStack(spacing: 12) {
+                                HStack {
+                                    Image(category.iconName!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30, height: 30)
+                                    
+                                    Text(category.name!)
+                                        .foregroundColor(Color(.label))
+                                }
+                                Spacer()
+                                
+                                if selectedCategory == category {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
                     }
-                ))
-                .keyboardType(.decimalPad)
+                    .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+                    
+                    NavigationLink(destination: CategoriesListView(categories: $categories)) {
+                        Text("New Category")
+                    }
+                }
                 
-                DatePicker("Date",
-                           selection: $date,
-                           displayedComponents: .date)
-                
-                NavigationLink(destination: CategoriesListView(selectedCategory: $selectedCategory)
-                    .navigationTitle("Categories")
-                ) {
-                    if let selectedCategory = selectedCategory {
+                Section {
+                    Button {
+                        guard let selectedCategory = selectedCategory, let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD")
+                        else {
+                            return
+                        }
+
+                        let user = KeychainManager.shared.signUp.user
+
+                        let expense = WebExpense(user: user, category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date, id: nil)
+
+                        NetworkManager.shared.postExpense(expense: expense) { error in
+                            DispatchQueue.main.async {
+                                dismissAction()
+                            }
+                        }
+                    } label: {
                         HStack {
-                            Image(selectedCategory.iconName!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                            
-                            Text(selectedCategory.name!)
+                            Spacer()
+                            Text("Create")
+                                .foregroundColor(.white)
+                            Spacer()
                         }
-                    } else {
-                        Text("Select Category")
+                        .padding(.vertical, 8)
+                        .background(Color(UIColor.azureBlue))
+                        .cornerRadius(5)
                     }
+                    .buttonStyle(PlainButtonStyle())
                 }
-                
-                Button {
-                    guard let selectedCategory = selectedCategory,
-                          let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD")
-                    else {
-                        return
-                    }
-                    
-                    let user = KeychainManager.shared.signUp.user
-                    
-                    let expense = WebExpense(user: user, category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date, id: nil)
-                    
-                    NetworkManager.shared.postExpense(expense: expense) { error in
-                        DispatchQueue.main.async {
-                            dismissAction()
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Spacer()
-                        Text("Create")
-                            .foregroundColor(.white)
-                        Spacer()
-                    }
-                    .padding(.vertical, 8)
-                    .background(Color(UIColor.azureBlue))
-                    .cornerRadius(5)
-                }
-                .buttonStyle(PlainButtonStyle())
             }
             .navigationTitle("Add Expense")
             .navigationBarItems(trailing: Button {
@@ -101,6 +119,20 @@ struct AddExpenseForm: View {
                     .frame(width: 44, height: 44)
                     .foregroundColor(.primary)
             })
+        }
+        .onAppear {
+            fetchCategories()
+        }
+    }
+    
+    func fetchCategories() {
+        NetworkManager.shared.fetchCategories { result in
+            switch result {
+            case .success(let categories):
+                self.categories = categories
+            case .failure(_):
+                break
+            }
         }
     }
 }
