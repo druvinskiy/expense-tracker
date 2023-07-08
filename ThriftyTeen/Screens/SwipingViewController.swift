@@ -21,6 +21,7 @@ class SwipingViewController: UIViewController {
     }()
     
     var shouldScroll = true
+    var isScrollingAnimated = false
     
     var allExpenses: [Expense]
     var expensesByWeek: [WeekExpenseRange]
@@ -119,6 +120,7 @@ class SwipingViewController: UIViewController {
                 self.month = ExpensesHelper.monthNumber(year: self.year, weekNumber: self.week)
             }
             
+            self.isScrollingAnimated = true
             self.shouldScroll = true
             self.view.layoutSubviews()
         }))
@@ -148,6 +150,7 @@ class SwipingViewController: UIViewController {
                 self.month = ExpensesHelper.monthNumber(year: self.year, weekNumber: self.week)
             }
             
+            self.isScrollingAnimated = true
             self.shouldScroll = true
             self.view.layoutSubviews()
         }))
@@ -190,8 +193,9 @@ class SwipingViewController: UIViewController {
             indexPath = IndexPath(item: month - 1, section: 0)
         }
         
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: isScrollingAnimated)
         shouldScroll = false
+        isScrollingAnimated = false
     }
     
     override func viewDidLoad() {
