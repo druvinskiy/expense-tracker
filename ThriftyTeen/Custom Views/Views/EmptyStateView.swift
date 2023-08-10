@@ -16,7 +16,7 @@ class EmptyStateView: UIView {
         var message: String {
             switch self {
             case .noExpensesAtAll:
-                return "No expenses. Add one by tapping the plus button."
+                return "No expenses. Add one by tapping the button below."
             case .noMonthlyExpenses:
                 return "No expenses for this month."
             }
@@ -25,9 +25,9 @@ class EmptyStateView: UIView {
         var graphicName: String {
             switch self {
             case .noExpensesAtAll:
-                return "Illustration_NoExpensesAtAll_v3"
+                return "Illustration_NoExpensesAtAll"
             case .noMonthlyExpenses:
-                return "Illustration_NoMonthlyExpenses_v3"
+                return "Illustration_NoMonthlyExpenses"
             }
         }
     }
@@ -59,26 +59,45 @@ class EmptyStateView: UIView {
     private func configureMessageLabel() {
         messageLabel.numberOfLines = 0
         messageLabel.textColor = .secondaryLabel
-
-        NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: graphicImageView.bottomAnchor),
-            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
-            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-    
-    private func configureGraphicImageView() {
         graphicImageView.translatesAutoresizingMaskIntoConstraints = false
         graphicImageView.contentMode = .scaleAspectFit
         
+        let stackView = UIStackView(arrangedSubviews: [graphicImageView, messageLabel])
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.backgroundColor = .red
+        addSubview(stackView)
+        
         NSLayoutConstraint.activate([
-            graphicImageView.topAnchor.constraint(equalTo: topAnchor),
-            graphicImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            graphicImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
-            graphicImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
+            graphicImageView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8),
+            graphicImageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.8),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+
+//        NSLayoutConstraint.activate([
+//            messageLabel.topAnchor.constraint(equalTo: graphicImageView.bottomAnchor),
+//            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
+//            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+//            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+//        ])
+    }
+    
+    private func configureGraphicImageView() {
+//        graphicImageView.translatesAutoresizingMaskIntoConstraints = false
+//        graphicImageView.contentMode = .scaleAspectFit
+        
+//        NSLayoutConstraint.activate([
+//            graphicImageView.topAnchor.constraint(equalTo: topAnchor),
+//            graphicImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            graphicImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+//            graphicImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
 //            graphicImageView.widthAnchor.constraint(equalToConstant: 300),
 //            graphicImageView.heightAnchor.constraint(equalToConstant: 303)
-        ])
+//        ])
     }
 }

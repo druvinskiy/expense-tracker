@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        if KeychainManager.shared.signUp != nil {
+        if KeychainManager.shared.registrationData != nil {
             let navigationController = UINavigationController(rootViewController: YearsViewController())
             navigationController.navigationBar.prefersLargeTitles = true
             window?.rootViewController = navigationController

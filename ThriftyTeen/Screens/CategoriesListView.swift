@@ -72,7 +72,7 @@ struct CategoriesListView: View {
     }
     
     func postCategory() {
-        let user = KeychainManager.shared.signUp.user
+        let user = KeychainManager.shared.registrationData.user
         
         let category = Category(iconName: "Icon\(selectedIndex)", user: user, id: nil, name: name)
         NetworkManager.shared.postCategory(category: category) { error in

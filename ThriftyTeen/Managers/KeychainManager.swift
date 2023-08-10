@@ -10,10 +10,10 @@ import Foundation
 final class KeychainManager {
     static let shared = KeychainManager()
     
-    var signUp: SignUp! {
+    var registrationData: RegistrationData! {
         return KeychainManager.shared.read(service: .bearerToken,
                                            account: .expenseTracker,
-                                           type: SignUp.self)
+                                           type: RegistrationData.self)
     }
     
     enum Service {

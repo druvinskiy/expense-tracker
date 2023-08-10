@@ -10,12 +10,17 @@ import SwiftUI
 struct AddExpenseForm: View {
     @State private var title = ""
     @State private var amount = ""
-    @State private var date = Date()
+    @State private var date: Date
     @State private var categories = [Category]()
     @State private var selectedCategory: Category?
     @Environment(\.colorScheme) var colorScheme
     
     var dismissAction: (() -> Void)
+    
+    init(initialDate: Date = Date(), dismissAction: @escaping (() -> Void)) {
+        _date = State(initialValue: initialDate)
+        self.dismissAction = dismissAction
+    }
     
     private let currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -87,7 +92,7 @@ struct AddExpenseForm: View {
                             return
                         }
 
-                        let user = KeychainManager.shared.signUp.user
+                        let user = KeychainManager.shared.registrationData.user
 
                         let expense = WebExpense(user: user, category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date, id: nil)
 

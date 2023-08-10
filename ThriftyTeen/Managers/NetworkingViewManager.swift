@@ -65,8 +65,8 @@ class NetworkingViewsManager {
         NSLayoutConstraint.activate([
             emptyStateView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
             emptyStateView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
-            emptyStateView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: -50),
-            emptyStateView.heightAnchor.constraint(equalTo: parentView.heightAnchor, multiplier: 0.7)
+            emptyStateView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: -20),
+            emptyStateView.heightAnchor.constraint(equalTo: parentView.heightAnchor, multiplier: 0.5)
         ])
     }
     

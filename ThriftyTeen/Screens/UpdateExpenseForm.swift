@@ -148,7 +148,7 @@ struct UpdateExpenseForm: View {
             return
         }
         
-        let id = KeychainManager.shared.signUp.user.id!
+        let id = KeychainManager.shared.registrationData.user.id!
         let expense = PatchExpense(id: expense.id!, userID: id, categoryID: selectedCategory.id!, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date)
         
         NetworkManager.shared.patchExpense(expense: expense) { result in

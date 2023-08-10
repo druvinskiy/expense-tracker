@@ -25,6 +25,7 @@
 		63AECEF229C95BD3005D5732 /* AddExpenseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AECEF129C95BD3005D5732 /* AddExpenseForm.swift */; };
 		63B191F929CE82B9008C010B /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B191F829CE82B9008C010B /* CategoriesListView.swift */; };
 		63B191FB29CE87F7008C010B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B191FA29CE87F7008C010B /* Category.swift */; };
+		63D17AEE2A8401BA009C9264 /* SignInWithAppleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D17AED2A8401BA009C9264 /* SignInWithAppleViewController.swift */; };
 		63E5593229B9715A00F46229 /* YearsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E5593129B9715A00F46229 /* YearsViewController.swift */; };
 		63E5593529B971EA00F46229 /* YearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E5593429B971EA00F46229 /* YearCell.swift */; };
 		63EB393629F833B400579212 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63EB393829F833B400579212 /* Localizable.strings */; };
@@ -53,7 +54,7 @@
 		632928BD2A3E62ED002EB729 /* UpdateExpenseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateExpenseForm.swift; sourceTree = "<group>"; };
 		632928BF2A3FE022002EB729 /* AccountForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountForm.swift; sourceTree = "<group>"; };
 		632928C12A3FEE20002EB729 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		632928C32A3FF1B4002EB729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		632928C32A3FF1B4002EB729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		632928C52A40C3B3002EB729 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		632928C72A40ED3C002EB729 /* Decimal+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Ext.swift"; sourceTree = "<group>"; };
 		63394C7829F61C1B006C235F /* ThriftyTeen.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ThriftyTeen.entitlements; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		63AECEF129C95BD3005D5732 /* AddExpenseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseForm.swift; sourceTree = "<group>"; };
 		63B191F829CE82B9008C010B /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		63B191FA29CE87F7008C010B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		63D17AED2A8401BA009C9264 /* SignInWithAppleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleViewController.swift; sourceTree = "<group>"; };
 		63E5593129B9715A00F46229 /* YearsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsViewController.swift; sourceTree = "<group>"; };
 		63E5593429B971EA00F46229 /* YearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearCell.swift; sourceTree = "<group>"; };
 		63EB393729F833B400579212 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		63F0992C29B5971A00B97BC2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				63D17AED2A8401BA009C9264 /* SignInWithAppleViewController.swift */,
 				63E5593129B9715A00F46229 /* YearsViewController.swift */,
 				639A131029B660920069E39E /* MonthsViewController.swift */,
 				63F0992D29B5973800B97BC2 /* SwipingViewController.swift */,
@@ -364,6 +367,7 @@
 				632928C22A3FEE20002EB729 /* KeychainManager.swift in Sources */,
 				63B191FB29CE87F7008C010B /* Category.swift in Sources */,
 				63F0991F29B595B900B97BC2 /* DRTitleLabel.swift in Sources */,
+				63D17AEE2A8401BA009C9264 /* SignInWithAppleViewController.swift in Sources */,
 				639A131329B6620C0069E39E /* UICollectionView+ViewControllerFactory.swift in Sources */,
 				639A131129B660920069E39E /* MonthsViewController.swift in Sources */,
 				632928C82A40ED3C002EB729 /* Decimal+Ext.swift in Sources */,

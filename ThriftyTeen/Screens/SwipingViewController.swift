@@ -5,7 +5,7 @@
 //  Created by David Ruvinskiy on 3/5/23.
 //
 
-import UIKit
+import SwiftUI
 
 class SwipingViewController: UIViewController {
     enum Mode {
@@ -160,23 +160,26 @@ class SwipingViewController: UIViewController {
         return actionButton
     }()
     
-    let leftFloatingButton: UIButton = {
-        let configuration = UIImage.SymbolConfiguration(pointSize: 24.0, weight: .bold)
-        let plusImage = UIImage(systemName: "pencil", withConfiguration: configuration)?
-            .withTintColor(.white, renderingMode: .alwaysOriginal)
+    lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .deepForestGreen
+        configuration.baseForegroundColor = .white
+        configuration.image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular))
         
-        var plusConfiguration = UIButton.Configuration.filled()
-        plusConfiguration.baseBackgroundColor = .systemRed
-        plusConfiguration.image = plusImage
-        plusConfiguration.cornerStyle = .capsule
+        let action = UIAction(handler: {_ in
+            let initialDate = ExpensesHelper.dateFrom(year: self.year, month: self.month)
+            let formVC = UIHostingController(rootView: AddExpenseForm(initialDate: initialDate) {
+                self.yearsVCDelegate.expenseAdded()
+                self.dismiss(animated: true)
+            })
+            self.present(formVC, animated: true)
+        })
         
-        let actionButton = UIButton(configuration: plusConfiguration, primaryAction: UIAction(handler: {_ in
-            print("test")
-        }))
+        let button = UIButton(configuration: configuration, primaryAction: action)
+        button.translatesAutoresizingMaskIntoConstraints = false
         
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-         
-        return actionButton
+        return button
     }()
     
     override func viewDidLayoutSubviews() {
@@ -218,6 +221,7 @@ class SwipingViewController: UIViewController {
         view.addSubview(calendarButton)
         view.addSubview(rightArrow)
         view.addSubview(leftArrow)
+        view.addSubview(addButton)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -240,6 +244,11 @@ class SwipingViewController: UIViewController {
             
             leftArrow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             leftArrow.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            addButton.bottomAnchor.constraint(equalTo: rightArrow.topAnchor, constant: -5),
+            addButton.widthAnchor.constraint(equalToConstant: 50),
+            addButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     

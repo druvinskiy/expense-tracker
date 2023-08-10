@@ -8,7 +8,8 @@
 import SwiftUI
 
 protocol YearsViewControllerDelegate {
-    func updateData(originalExpense: Expense, updatedExpense: Expense)
+    func expenseUpdated(originalExpense: Expense, updatedExpense: Expense)
+    func expenseAdded()
 }
 
 class YearsViewController: UIViewController {
@@ -22,6 +23,47 @@ class YearsViewController: UIViewController {
         formVC.modalPresentationStyle = .fullScreen
         self.present(formVC, animated: true)
     }))
+    
+    lazy var addButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        
+        // Get the screen size
+        let screenSize = UIScreen.main.bounds.size
+        
+        let imageHeightProportion: CGFloat = 0.1 // Adjust this proportion to fit your needs
+        let imageHeight = screenSize.height * imageHeightProportion
+        
+        var image = UIImage(named: "Illustration_Idle2")!
+        
+        let aspectRatio = image.size.width / image.size.height
+        let imageWidth = imageHeight * aspectRatio
+        
+        configuration.image = image
+            .resized(to: CGSize(width: imageWidth, height: imageHeight))
+            .withRenderingMode(.alwaysOriginal)
+            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0))
+        
+        configuration.imagePlacement = .leading
+        configuration.imagePadding = 30
+        configuration.background.cornerRadius = 10
+        configuration.baseBackgroundColor = .vibrantGreen
+        
+        var container = AttributeContainer()
+        container.font = UIFont.boldSystemFont(ofSize: 24)
+        configuration.attributedTitle = AttributedString("Add Expense", attributes: container)
+        
+        let action = UIAction(handler: {_ in
+            let formVC = UIHostingController(rootView: AddExpenseForm() {
+                self.dismiss(animated: true)
+            })
+            formVC.modalPresentationStyle = .fullScreen
+            self.present(formVC, animated: true)
+        })
+        
+        let button = UIButton(configuration: configuration, primaryAction: action)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        return button
+    }()
     
     var monthsVC: MonthsViewController?
     
@@ -52,11 +94,22 @@ class YearsViewController: UIViewController {
     
     func configureUI() {
         collectionView.backgroundColor = .systemBackground
-        collectionView.addSubview(addButtonArrowImageView)
+        //        collectionView.addSubview(addButtonArrowImageView)
+        //
+        //        NSLayoutConstraint.activate([
+        //            addButtonArrowImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+        //            addButtonArrowImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        //        ])
+        
+        collectionView.addSubview(addButton)
+        
+        addButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addButtonArrowImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            addButtonArrowImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            //            addButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -120,7 +173,15 @@ extension YearsViewController: UICollectionViewDelegate, UICollectionViewDataSou
 }
 
 extension YearsViewController: YearsViewControllerDelegate {
-    func updateData(originalExpense: Expense, updatedExpense: Expense) {
+    func expenseAdded() {
+        fetchFilteredExpenses()
+    }
+    
+    func expenseUpdated(originalExpense: Expense, updatedExpense: Expense) {
+        fetchFilteredExpenses()
+    }
+    
+    func fetchFilteredExpenses() {
         NetworkManager.shared.fetchExpenses { result in
             DispatchQueue.main.async {
                 switch result {
@@ -133,6 +194,15 @@ extension YearsViewController: YearsViewControllerDelegate {
                     break
                 }
             }
+        }
+    }
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
         }
     }
 }

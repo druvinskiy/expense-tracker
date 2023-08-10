@@ -99,7 +99,7 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 
-                let decodedResponse = try decoder.decode(SignUp.self, from: data)
+                let decodedResponse = try decoder.decode(RegistrationData.self, from: data)
                 KeychainManager.shared.save(decodedResponse, service: .bearerToken, account: .expenseTracker)
                 completed(nil)
             } catch {
@@ -181,7 +181,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.POST.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.signUp.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
@@ -226,7 +226,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.POST.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.signUp.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
@@ -288,7 +288,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.DELETE.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.signUp.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
@@ -318,7 +318,7 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethods.GET.rawValue
-        request.addValue(Token.bearer(KeychainManager.shared.signUp.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
@@ -361,7 +361,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.PATCH.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.signUp.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)

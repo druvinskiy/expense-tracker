@@ -107,6 +107,11 @@ enum ExpensesHelper {
         return month
     }
     
+    static func dateFrom(year: Int, month: Int) -> Date {
+        var dateComponents = DateComponents(year: year, month: month, day: 1)
+        return calendar.date(from: dateComponents)!
+    }
+    
     static func getExpensesByWeek(for expenses: [Expense], year: Int, month: Int) -> [WeekExpenseRange] {
         let dateComponents = DateComponents(year: year, month: month)
         

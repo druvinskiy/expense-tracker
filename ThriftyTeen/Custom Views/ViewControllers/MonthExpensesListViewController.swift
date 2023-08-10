@@ -135,7 +135,7 @@ extension MonthExpensesListViewController: UICollectionViewDelegate, UICollectio
                 return
             }
             
-            self.yearsVCDelegate.updateData(originalExpense: expense, updatedExpense: updatedExpense)
+            self.yearsVCDelegate.expenseUpdated(originalExpense: expense, updatedExpense: updatedExpense)
             self.dismiss(animated: true)
         }
         
