@@ -30,11 +30,19 @@ struct AddExpenseForm: View {
         return formatter
     }()
     
+    enum FormField {
+        case title, amount
+    }
+    
+    @FocusState private var focusedField: FormField?
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("General information")) {
                     TextField("Title", text: $title)
+                        .submitLabel(.next)
+                        .focused($focusedField, equals: .title)
                     
                     TextField("Amount", text: Binding(
                         get: {
@@ -49,6 +57,7 @@ struct AddExpenseForm: View {
                         }
                     ))
                     .keyboardType(.decimalPad)
+                    .focused($focusedField, equals: .amount)
                     
                     DatePicker("Date",
                                selection: $date,
@@ -62,12 +71,12 @@ struct AddExpenseForm: View {
                         } label: {
                             HStack(spacing: 12) {
                                 HStack {
-                                    Image(category.iconName!)
+                                    Image(category.iconName)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 30, height: 30)
                                     
-                                    Text(category.name!)
+                                    Text(category.name)
                                         .foregroundColor(Color(.label))
                                 }
                                 Spacer()
@@ -91,12 +100,8 @@ struct AddExpenseForm: View {
                         else {
                             return
                         }
-
-                        let user = KeychainManager.shared.registrationData.user
-
-                        let expense = WebExpense(user: user, category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date, id: nil)
-
-                        NetworkManager.shared.postExpense(expense: expense) { error in
+                        
+                        NetworkManager.shared.postExpense(category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date) { error in
                             DispatchQueue.main.async {
                                 dismissAction()
                             }
@@ -113,6 +118,14 @@ struct AddExpenseForm: View {
                         .cornerRadius(5)
                     }
                     .buttonStyle(PlainButtonStyle())
+                }
+            }
+            .onSubmit {
+                switch focusedField {
+                case .title:
+                    focusedField = .amount
+                default:
+                    focusedField = nil
                 }
             }
             .navigationTitle("Add Expense")
@@ -135,6 +148,7 @@ struct AddExpenseForm: View {
             switch result {
             case .success(let categories):
                 self.categories = categories
+                self.selectedCategory = categories.first
             case .failure(_):
                 break
             }

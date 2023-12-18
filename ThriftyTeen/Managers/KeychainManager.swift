@@ -10,12 +10,6 @@ import Foundation
 final class KeychainManager {
     static let shared = KeychainManager()
     
-    var registrationData: RegistrationData! {
-        return KeychainManager.shared.read(service: .bearerToken,
-                                           account: .expenseTracker,
-                                           type: RegistrationData.self)
-    }
-    
     enum Service {
         case bearerToken
         

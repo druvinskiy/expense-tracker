@@ -6,7 +6,7 @@
   
 */
 
-"years-view.navigation-item.title" = "Years";
+"years-view.navigation-item.title" = "Expenses";
 "month-expenses-view.label.overview %@" = "%@ Overview";
 "overview-view.label.spent-most-on" = "You spent the most on:";
 "overview-view.label.monthly-spend" = "Total monthly spend:";

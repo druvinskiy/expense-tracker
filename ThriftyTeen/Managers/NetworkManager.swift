@@ -50,14 +50,16 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     private let baseUrl = "https://api.davidruvinskiy.com/"
-    
     private let dateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         return dateFormatter
     }()
     
-    func signUp(user: User, completed: @escaping (DRError?) -> Void) {
+    var registrationData: RegistrationData?
+    
+    // MARK: - Account
+    func signUp(loginRequest: LoginRequest, completed: @escaping (NetworkingError?) -> Void) {
         let url = URL(string: baseUrl + "/auth/signup")
         
         guard let url = url else {
@@ -74,7 +76,7 @@ class NetworkManager {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
         
-        let data = try? encoder.encode(user)
+        let data = try? encoder.encode(loginRequest)
         request.httpBody = data
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -98,35 +100,114 @@ class NetworkManager {
             
             do {
                 let decoder = JSONDecoder()
-                
                 let decodedResponse = try decoder.decode(RegistrationData.self, from: data)
+                
                 KeychainManager.shared.save(decodedResponse, service: .bearerToken, account: .expenseTracker)
+                self.registrationData = decodedResponse
+                
                 completed(nil)
             } catch {
                 completed(.invalidData)
             }
-            
         }
         
         task.resume()
-        
-//        postGenericJSONData(url: url, payload: user) { (result: Result<SignUp, DRError>) in
-//            switch result {
-//            case .success(let signUp):
-//                KeychainManager.shared.save(signUp, service: .bearerToken, account: .expenseTracker)
-//                KeychainManager.shared.signUp = KeychainManager.shared.read(service: .bearerToken,
-//                                                                            account: .expenseTracker,
-//                                                                            type: SignUp.self)
-//            case .failure(let error):
-//                completed(error)
-//            }
-//        }
     }
     
-    func fetchExpenses(completed: @escaping (Result<[Expense], DRError>) -> Void) {
+    func signIn(email: String, password: String, completed: @escaping (NetworkingError?) -> Void) {
+        let url = URL(string: baseUrl + "auth/signin")
+        
+        guard let url = url else {
+            completed(.invalidURL)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethods.POST.rawValue
+        request.addValue(Token.basicAuth(email, password).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let _ = error {
+                completed(.unableToComplete)
+                return
+            }
+            
+            let response = response as! HTTPURLResponse
+            
+            guard response.statusCode == .success || response.statusCode == .created else {
+                print(HTTPURLResponse.localizedString(forStatusCode: ))
+                completed(.invalidResponse)
+                return
+            }
+            
+            guard let data = data else {
+                completed(.invalidData)
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(RegistrationData.self, from: data)
+                
+                KeychainManager.shared.save(decodedResponse, service: .bearerToken, account: .expenseTracker)
+                self.registrationData = decodedResponse
+                
+                completed(nil)
+            } catch {
+                completed(.invalidData)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func signOut(completed: @escaping (NetworkingError?) -> Void) {
+        let url = URL(string: baseUrl + "auth/signout")
+        
+        guard let url = url else {
+            completed(.invalidURL)
+            return
+        }
+        
+        guard let token = registrationData?.token else {
+            completed(.unableToComplete)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethods.POST.rawValue
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let _ = error {
+                completed(.unableToComplete)
+                return
+            }
+            
+            let response = response as! HTTPURLResponse
+            
+            guard response.statusCode == .success || response.statusCode == .created else {
+                print(HTTPURLResponse.localizedString(forStatusCode: ))
+                completed(.invalidResponse)
+                return
+            }
+            
+            KeychainManager.shared.delete(service: .bearerToken, account: .expenseTracker)
+            self.registrationData = nil
+            
+            completed(nil)
+        }
+        
+        task.resume()
+    }
+    
+    // MARK: - Expenses
+    func fetchExpenses(completed: @escaping (Result<[Expense], NetworkingError>) -> Void) {
         let url = URL(string: baseUrl + "expenses")
         
-        fetchGenericJSONData(url: url) { (result: Result<[WebExpense], DRError>) in
+        fetchGenericJSONData(url: url) { (result: Result<[FetchExpense], NetworkingError>) in
             switch result {
             case .success(let webExpenses):
                 completed(.success(webExpenses.map({ Expense(webExpense: $0) })))
@@ -136,43 +217,81 @@ class NetworkManager {
         }
     }
     
-    func fetchCategories(completed: @escaping (Result<[Category], DRError>) -> Void) {
-        let url = URL(string: baseUrl + "categories")
-        fetchGenericJSONData(url: url, completed: completed)
-    }
-    
-    func postExpense(expense: WebExpense, completed: @escaping (DRError?) -> Void) {
+    func postExpense(category: Category,
+                     title: String,
+                     amount: Int,
+                     currencyCode: String,
+                     dateCreated: Date,
+                     completed: @escaping (NetworkingError?) -> Void) {
+        
+        guard let user = registrationData?.user else {
+            completed(.unableToComplete)
+            return
+        }
+        
         let url = URL(string: baseUrl + "expenses")
+        let expense = PostExpense(user: user, category: category, title: title, amount: amount, currencyCode: currencyCode, dateCreated: dateCreated)
         
         postGenericJSONData(url: url, payload: expense, completed: completed)
     }
     
-    func patchExpense(expense: PatchExpense, completed: @escaping (Result<Expense, DRError>) -> Void) {
-        let url = URL(string: baseUrl + "expenses")
-        
-        patchGenericJSONData(url: url, payload: expense) { (result: Result<WebExpense, DRError>) in
-            switch result {
-            case .success(let webExpense):
-                completed(.success(Expense(webExpense: webExpense)))
-            case .failure(let error):
-                completed(.failure(error))
-            }
+    func patchExpense(expenseId: String,
+                      categoryId: String,
+                      title: String,
+                      amount: Int,
+                      currencyCode: String,
+                      dateCreated: Date,
+                      completed: @escaping (NetworkingError?) -> Void) {
+        guard let user = registrationData?.user else {
+            completed(.unableToComplete)
+            return
         }
+        
+        let url = URL(string: baseUrl + "expenses")
+        let expense = PatchExpense(id: expenseId,
+                                        userID: user.id,
+                                        categoryID: categoryId,
+                                        title: title,
+                                        amount: amount,
+                                        currencyCode: currencyCode,
+                                        dateCreated: dateCreated)
+        
+        patchGenericJSONData(url: url, payload: expense, completed: completed)
     }
     
-    func deleteExpense(expense: Expense, completed: @escaping (DRError?) -> Void) {
-        let url = URL(string: baseUrl + "expenses/\(expense.id!)")
+    func deleteExpense(expense: Expense, completed: @escaping (NetworkingError?) -> Void) {
+        let url = URL(string: baseUrl + "expenses/\(expense.id)")
         delete(url: url, completed: completed)
     }
     
-    func postCategory(category: Category, completed: @escaping (DRError?) -> Void) {
+    // MARK: - Categories
+    func fetchCategories(completed: @escaping (Result<[Category], NetworkingError>) -> Void) {
         let url = URL(string: baseUrl + "categories")
+        fetchGenericJSONData(url: url, completed: completed)
+    }
+    
+    func postCategory(iconName: String, name: String, completed: @escaping (NetworkingError?) -> Void) {
+        guard let user = registrationData?.user else {
+            completed(.unableToComplete)
+            return
+        }
+        
+        let url = URL(string: baseUrl + "categories")
+        let category = PostCategory(user: user, iconName: iconName, name: name)
+        
         postGenericJSONData(url: url, payload: category, completed: completed)
     }
     
-    private func postGenericJSONData<T: Encodable>(url: URL?, payload: T, completed: @escaping (DRError?) -> Void) {
+    // MARK: - Generic Functions
+    private func postGenericJSONData<T: Encodable>(url: URL?, payload: T, completed: @escaping (NetworkingError?) -> Void) {
         guard let url = url else {
             completed(.invalidURL)
+            return
+        }
+        
+        // TODO: Create a different error for this
+        guard let token = registrationData?.token else {
+            completed(.unableToComplete)
             return
         }
         
@@ -181,7 +300,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.POST.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
@@ -215,9 +334,15 @@ class NetworkManager {
         task.resume()
     }
     
-    private func postGenericJSONData<T: Encodable, U: Decodable>(url: URL?, payload: T, completed: @escaping (Result<U, DRError>) -> Void) {
+    private func postGenericJSONData<T: Encodable, U: Decodable>(url: URL?, payload: T, completed: @escaping (Result<U, NetworkingError>) -> Void) {
         guard let url = url else {
             completed(.failure(.invalidURL))
+            return
+        }
+        
+        // TODO: Create a different error for this
+        guard let token = registrationData?.token else {
+            completed(.failure(.unableToComplete))
             return
         }
         
@@ -226,7 +351,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.POST.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
@@ -277,9 +402,15 @@ class NetworkManager {
         task.resume()
     }
     
-    private func delete(url: URL?, completed: @escaping (DRError?) -> Void) {
+    private func delete(url: URL?, completed: @escaping (NetworkingError?) -> Void) {
         guard let url = url else {
             completed(.invalidURL)
+            return
+        }
+        
+        // TODO: Create a different error for this
+        guard let token = registrationData?.token else {
+            completed(.unableToComplete)
             return
         }
         
@@ -288,7 +419,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.DELETE.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
@@ -310,15 +441,21 @@ class NetworkManager {
         task.resume()
     }
     
-    private func fetchGenericJSONData<T: Decodable>(url: URL?, completed: @escaping (Result<T, DRError>) -> Void) {
+    private func fetchGenericJSONData<T: Decodable>(url: URL?, completed: @escaping (Result<T, NetworkingError>) -> Void) {
         guard let url = url else {
             completed(.failure(.invalidURL))
             return
         }
         
+        // TODO: Create a different error for this
+        guard let token = registrationData?.token else {
+            completed(.failure(.unableToComplete))
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethods.GET.rawValue
-        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
@@ -350,9 +487,15 @@ class NetworkManager {
         task.resume()
     }
     
-    private func patchGenericJSONData<T: Encodable, U: Decodable>(url: URL?, payload: T, completed: @escaping (Result<U, DRError>) -> Void) {
+    private func patchGenericJSONData<T: Encodable>(url: URL?, payload: T, completed: @escaping (NetworkingError?) -> Void) {
         guard let url = url else {
-            completed(.failure(.invalidURL))
+            completed(.invalidURL)
+            return
+        }
+        
+        // TODO: Create a different error for this
+        guard let token = registrationData?.token else {
+            completed(.unableToComplete)
             return
         }
         
@@ -361,7 +504,7 @@ class NetworkManager {
         request.httpMethod = HttpMethods.PATCH.rawValue
         request.addValue(MIMEType.JSON.rawValue,
                          forHTTPHeaderField: HttpHeaders.contentType.rawValue)
-        request.addValue(Token.bearer(KeychainManager.shared.registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(self.dateFormatter)
@@ -376,7 +519,7 @@ class NetworkManager {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
-                completed(.failure(.unableToComplete))
+                completed(.unableToComplete)
                 return
             }
             
@@ -384,12 +527,12 @@ class NetworkManager {
             
             guard response.statusCode == .accepted || response.statusCode == .created else {
                 print(HTTPURLResponse.localizedString(forStatusCode: ))
-                completed(.failure(.invalidResponse))
+                completed(.invalidResponse)
                 return
             }
             
             guard let data = data else {
-                completed(.failure(.invalidData))
+                completed(.invalidData)
                 return
             }
             
@@ -397,15 +540,17 @@ class NetworkManager {
                 print(JSONString)
             }
             
-            do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
-                
-                let decodedResponse = try decoder.decode(U.self, from: data)
-                completed(.success(decodedResponse))
-            } catch {
-                completed(.failure(.invalidData))
-            }
+//            do {
+//                let decoder = JSONDecoder()
+//                decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+//
+//                let decodedResponse = try decoder.decode(U.self, from: data)
+//                completed(.success(decodedResponse))
+//            } catch {
+//                completed(.failure(.invalidData))
+//            }
+            
+            completed(nil)
         }
         
         task.resume()

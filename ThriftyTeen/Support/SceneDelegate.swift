@@ -21,13 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        if KeychainManager.shared.registrationData != nil {
+        if let registrationData = KeychainManager.shared.read(service: .bearerToken, account: .expenseTracker, type: RegistrationData.self) {
+            NetworkManager.shared.registrationData = registrationData
+            
             let navigationController = UINavigationController(rootViewController: YearsViewController())
             navigationController.navigationBar.prefersLargeTitles = true
             window?.rootViewController = navigationController
         } else {
-            let formVC = UIHostingController(rootView: AccountForm())
-            window?.rootViewController = formVC
+            window?.rootViewController = SignInUpViewController()
         }
         
         window?.makeKeyAndVisible()

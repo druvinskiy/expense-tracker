@@ -8,16 +8,14 @@
 import Foundation
 
 struct Expense {
-    let user: User
     var category: Category
     let title: String
     let amount: Decimal
     let currencyCode: String
     let dateCreated: Date
-    let id: String?
+    let id: String
     
-    init(webExpense: WebExpense) {
-        self.user = webExpense.user
+    init(webExpense: FetchExpense) {
         self.category = webExpense.category
         self.title = webExpense.title
         self.currencyCode = webExpense.currencyCode
@@ -27,20 +25,28 @@ struct Expense {
     }
 }
 
-struct WebExpense: Codable {
-    let user: User
+struct FetchExpense: Codable {
     var category: Category
     let title: String
     let amount: Int
     let currencyCode: String
     let dateCreated: Date
-    let id: String?
+    let id: String
 }
 
 struct PatchExpense: Encodable {
     let id: String
     let userID: String
     let categoryID: String
+    let title: String
+    let amount: Int
+    let currencyCode: String
+    let dateCreated: Date
+}
+
+struct PostExpense: Encodable {
+    var user: User
+    let category: Category
     let title: String
     let amount: Int
     let currencyCode: String

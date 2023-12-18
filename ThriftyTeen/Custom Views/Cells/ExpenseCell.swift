@@ -23,7 +23,7 @@ class ExpenseCell: UICollectionViewCell {
     
     func set(expense: Expense) {
         titleLabel.text = expense.title
-        categoryLabel.text = expense.category.name!.capitalized
+        categoryLabel.text = expense.category.name.capitalized
         
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

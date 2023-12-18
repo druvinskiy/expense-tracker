@@ -71,7 +71,7 @@ class MonthExpensesListViewController: UIViewController {
         
         let viewModels = [
             OverviewCellViewModel(title: String(localized: "overview-view.label.spent-most-on"),
-                                  subtitle: mostSpentCategory.name!.localizedCapitalized, iconName: mostSpentCategory.iconName),
+                                  subtitle: mostSpentCategory.name.localizedCapitalized, iconName: mostSpentCategory.iconName),
             
             OverviewCellViewModel(title: String(localized: "overview-view.label.monthly-spend"),
                                   subtitle: formattedAmount, iconName: nil),
@@ -129,13 +129,14 @@ extension MonthExpensesListViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let expense = expenses[indexPath.row]
-        let updateExpenseForm = UpdateExpenseForm(expense: expense) { updatedExpense in
-            guard let updatedExpense = updatedExpense else {
-                self.dismiss(animated: true)
-                return
-            }
+        let updateExpenseForm = UpdateExpenseForm(expense: expense) {
+//            guard let updatedExpense = updatedExpense else {
+//                self.dismiss(animated: true)
+//                return
+//            }
+            print("hereeee")
             
-            self.yearsVCDelegate.expenseUpdated(originalExpense: expense, updatedExpense: updatedExpense)
+            self.yearsVCDelegate.expenseUpdated()
             self.dismiss(animated: true)
         }
         

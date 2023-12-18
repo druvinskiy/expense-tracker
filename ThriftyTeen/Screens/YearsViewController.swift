@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol YearsViewControllerDelegate {
-    func expenseUpdated(originalExpense: Expense, updatedExpense: Expense)
+    func expenseUpdated()
     func expenseAdded()
 }
 
@@ -16,59 +16,16 @@ class YearsViewController: UIViewController {
     lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionView.createTwoColumnFlowLayout(in: view))
     lazy var networkingViewManager = NetworkingViewsManager(parentViewController: navigationController!)
     
-    lazy var addButtonArrowImageView = AddButtonArrowImageView(primaryAction:  UIAction(handler: {_ in
-        let formVC = UIHostingController(rootView: AddExpenseForm() {
-            self.dismiss(animated: true)
-        })
-        formVC.modalPresentationStyle = .fullScreen
-        self.present(formVC, animated: true)
-    }))
+    enum CellType {
+        case addExpense
+        case expenseYear(Int)
+    }
     
-    lazy var addButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        
-        // Get the screen size
-        let screenSize = UIScreen.main.bounds.size
-        
-        let imageHeightProportion: CGFloat = 0.1 // Adjust this proportion to fit your needs
-        let imageHeight = screenSize.height * imageHeightProportion
-        
-        var image = UIImage(named: "Illustration_Idle2")!
-        
-        let aspectRatio = image.size.width / image.size.height
-        let imageWidth = imageHeight * aspectRatio
-        
-        configuration.image = image
-            .resized(to: CGSize(width: imageWidth, height: imageHeight))
-            .withRenderingMode(.alwaysOriginal)
-            .withAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0))
-        
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 30
-        configuration.background.cornerRadius = 10
-        configuration.baseBackgroundColor = .vibrantGreen
-        
-        var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 24)
-        configuration.attributedTitle = AttributedString("Add Expense", attributes: container)
-        
-        let action = UIAction(handler: {_ in
-            let formVC = UIHostingController(rootView: AddExpenseForm() {
-                self.dismiss(animated: true)
-            })
-            formVC.modalPresentationStyle = .fullScreen
-            self.present(formVC, animated: true)
-        })
-        
-        let button = UIButton(configuration: configuration, primaryAction: action)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        return button
-    }()
+    var cellTypes = [CellType]()
     
     var monthsVC: MonthsViewController?
     
     var expenses = [Expense]()
-    var expenseYears = [Int]()
     var expensesByYear = [Int: [Expense]]()
     var selectedYear: Int?
     
@@ -77,6 +34,17 @@ class YearsViewController: UIViewController {
         
         configureCollectionView()
         configureUI()
+    }
+    
+    @objc func settingsButtonTapped() {
+        let settingsViewController = SettingsViewController {
+            self.dismiss(animated: false)
+        }
+        
+        let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
+        settingsNavigationController.navigationBar.prefersLargeTitles = true
+        
+        present(settingsNavigationController, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,27 +58,17 @@ class YearsViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(YearCell.self, forCellWithReuseIdentifier: YearCell.reuseID)
+        collectionView.register(AddExpenseCell.self, forCellWithReuseIdentifier: AddExpenseCell.reuseID)
     }
     
     func configureUI() {
         collectionView.backgroundColor = .systemBackground
-        //        collectionView.addSubview(addButtonArrowImageView)
-        //
-        //        NSLayoutConstraint.activate([
-        //            addButtonArrowImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-        //            addButtonArrowImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        //        ])
+        navigationItem.title = String(localized: "years-view.navigation-item.title") // change this to be more descriptive
         
-        collectionView.addSubview(addButton)
-        
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            //            addButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        let settingsItem = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"),
+                                           style: .plain, target: self, action: #selector(settingsButtonTapped))
+        settingsItem.tintColor = .label
+        navigationItem.rightBarButtonItem = settingsItem
     }
     
     func getExpenses() {
@@ -132,43 +90,65 @@ class YearsViewController: UIViewController {
     
     func updateUI(with expenses: [Expense]) {
         self.expenses = expenses
-        expenseYears = ExpensesHelper.getExpenseYears(expenses)
+        let expenseYears = ExpensesHelper.getExpenseYears(expenses)
+        
+        cellTypes = [CellType.addExpense]
+        
+        cellTypes.append(contentsOf: expenseYears.map { year in
+            CellType.expenseYear(year)
+        })
+        
         expensesByYear = ExpensesHelper.getExpensesByYear(expenses)
         collectionView.reloadData()
+    }
+    
+    func addExpenseCellTapped() {
+        let formVC = UIHostingController(rootView: AddExpenseForm() {
+            self.dismiss(animated: true)
+        })
+        formVC.modalPresentationStyle = .fullScreen
+        self.present(formVC, animated: true)
+    }
+    
+    func yearCellTapped(year: Int) {
+        let filteredExpenses = expensesByYear[year]!
+        selectedYear = year
         
-        if expenses.isEmpty { // move this to Array extension
-            networkingViewManager.showEmptyStateView(emptyState: .noExpensesAtAll)
-            addButtonArrowImageView.showTrainingAffordance()
-            navigationItem.title = ""
-        } else {
-            networkingViewManager.dismissEmptyStateView()
-            addButtonArrowImageView.hideTrainingAffordance()
-            navigationItem.title = String(localized: "years-view.navigation-item.title") // change this to be more descriptive
-        }
+        monthsVC = MonthsViewController(year: year, expenses: filteredExpenses, yearsVCDelegate: self)
+        navigationController?.pushViewController(monthsVC!, animated: true)
     }
 }
 
 extension YearsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return expensesByYear.count
+        return cellTypes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let year = expenseYears[indexPath.row]
-        let filteredExpenses = expensesByYear[year]!
+        let cellType = cellTypes[indexPath.item]
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: YearCell.reuseID, for: indexPath) as! YearCell
-        cell.set(expenses: filteredExpenses, yearNumber: year)
-        
-        return cell
+        switch cellType {
+        case .addExpense:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: AddExpenseCell.reuseID, for: indexPath)
+        case .expenseYear(let year):
+            let filteredExpenses = expensesByYear[year]!
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: YearCell.reuseID, for: indexPath) as! YearCell
+            cell.set(expenses: filteredExpenses, yearNumber: year)
+            
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedYear = expenseYears[indexPath.row]
-        let filteredExpenses = expensesByYear[selectedYear!]!
+        let cellType = cellTypes[indexPath.item]
         
-        monthsVC = MonthsViewController(year: selectedYear!, expenses: filteredExpenses, yearsVCDelegate: self)
-        navigationController?.pushViewController(monthsVC!, animated: true)
+        switch cellType {
+        case .addExpense:
+            addExpenseCellTapped()
+        case .expenseYear(let year):
+            yearCellTapped(year: year)
+        }
     }
 }
 
@@ -177,7 +157,7 @@ extension YearsViewController: YearsViewControllerDelegate {
         fetchFilteredExpenses()
     }
     
-    func expenseUpdated(originalExpense: Expense, updatedExpense: Expense) {
+    func expenseUpdated() {
         fetchFilteredExpenses()
     }
     
@@ -194,15 +174,6 @@ extension YearsViewController: YearsViewControllerDelegate {
                     break
                 }
             }
-        }
-    }
-}
-
-extension UIImage {
-    func resized(to size: CGSize) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        return renderer.image { _ in
-            draw(in: CGRect(origin: .zero, size: size))
         }
     }
 }

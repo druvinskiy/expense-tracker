@@ -14,7 +14,7 @@ struct UpdateExpenseForm: View {
     @State private var selectedCategory: Category?
     @State private var categories = [Category]()
     
-    var dismissAction: ((Expense?) -> Void)
+    var dismissAction: (() -> Void)
     let expense: Expense
     
     private let currencyFormatter: NumberFormatter = {
@@ -26,7 +26,13 @@ struct UpdateExpenseForm: View {
         return formatter
     }()
     
-    init(expense: Expense, dismissAction: @escaping ((Expense?) -> Void)) {
+    enum FormField {
+        case title, amount
+    }
+    
+    @FocusState private var focusedField: FormField?
+    
+    init(expense: Expense, dismissAction: @escaping (() -> Void)) {
         self.expense = expense
         _title = State(initialValue: expense.title)
         _amount = State(initialValue: currencyFormatter.string(from: NSDecimalNumber(decimal: expense.amount))!)
@@ -42,6 +48,8 @@ struct UpdateExpenseForm: View {
             Form {
                 Section(header: Text("General Information")) {
                     TextField("Title", text: $title)
+                        .submitLabel(.next)
+                        .focused($focusedField, equals: .title)
                     
                     TextField("Amount", text: Binding(
                         get: {
@@ -56,6 +64,7 @@ struct UpdateExpenseForm: View {
                         }
                     ))
                     .keyboardType(.decimalPad)
+                    .focused($focusedField, equals: .amount)
                     
                     DatePicker("Date",
                                selection: $date,
@@ -69,12 +78,12 @@ struct UpdateExpenseForm: View {
                         } label: {
                             HStack(spacing: 12) {
                                 HStack {
-                                    Image(category.iconName!)
+                                    Image(category.iconName)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 30, height: 30)
                                     
-                                    Text(category.name!)
+                                    Text(category.name)
                                         .foregroundColor(Color(.label))
                                 }
                                 Spacer()
@@ -94,20 +103,20 @@ struct UpdateExpenseForm: View {
                 
                 Section {
                     VStack {
-                        Button {
-                            patchExpense()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Update")
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                            .padding(.vertical, 8)
-                            .background(Color(UIColor.azureBlue))
-                            .cornerRadius(5)
-                        }
-                        .buttonStyle(PlainButtonStyle())
+//                        Button {
+//                            patchExpense()
+//                        } label: {
+//                            HStack {
+//                                Spacer()
+//                                Text("Update")
+//                                    .foregroundColor(.white)
+//                                Spacer()
+//                            }
+//                            .padding(.vertical, 8)
+//                            .background(Color(UIColor.azureBlue))
+//                            .cornerRadius(5)
+//                        }
+//                        .buttonStyle(PlainButtonStyle())
                         
                         Button {
                             deleteExpense()
@@ -126,14 +135,29 @@ struct UpdateExpenseForm: View {
                     }
                 }
             }
-            .navigationTitle("Update Expense")
-            .navigationBarItems(trailing: Button {
-                dismissAction(nil)
+            .onSubmit {
+                switch focusedField {
+                case .title:
+                    focusedField = .amount
+                default:
+                    focusedField = nil
+                }
+            }
+            .navigationTitle("Update \(expense.title)")
+            .navigationBarItems(leading: Button {
+                dismissAction()
             } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-                    .frame(width: 44, height: 44)
-                    .foregroundColor(.primary)
+                Text("Cancel")
+                    .foregroundColor(Color(.label))
+            }, trailing: Button {
+                patchExpense()
+            } label: {
+//                Image(systemName: "xmark")
+//                    .imageScale(.large)
+//                    .frame(width: 44, height: 44)
+//                    .foregroundColor(.primary)
+                Text("Done")
+                    .foregroundColor(Color(UIColor.azureBlue))
             })
         }
         .onAppear {
@@ -148,17 +172,19 @@ struct UpdateExpenseForm: View {
             return
         }
         
-        let id = KeychainManager.shared.registrationData.user.id!
-        let expense = PatchExpense(id: expense.id!, userID: id, categoryID: selectedCategory.id!, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date)
-        
-        NetworkManager.shared.patchExpense(expense: expense) { result in
+        NetworkManager.shared.patchExpense(expenseId: expense.id,
+                                           categoryId: selectedCategory.id,
+                                           title: title,
+                                           amount: intAmount,
+                                           currencyCode: "USD",
+                                           dateCreated: date)
+        { error in
+            guard error == nil else {
+                return
+            }
+            
             DispatchQueue.main.async {
-                switch result {
-                case .success(let updatedExpense):
-                    self.dismissAction(updatedExpense)
-                case .failure(_):
-                    break
-                }
+                self.dismissAction()
             }
         }
     }
@@ -166,7 +192,7 @@ struct UpdateExpenseForm: View {
     func deleteExpense() {
         NetworkManager.shared.deleteExpense(expense: expense) { error in
             DispatchQueue.main.async {
-                self.dismissAction(expense)
+                self.dismissAction()
             }
         }
     }

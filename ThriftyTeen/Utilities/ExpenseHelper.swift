@@ -112,40 +112,40 @@ enum ExpensesHelper {
         return calendar.date(from: dateComponents)!
     }
     
-    static func getExpensesByWeek(for expenses: [Expense], year: Int, month: Int) -> [WeekExpenseRange] {
-        let dateComponents = DateComponents(year: year, month: month)
-        
-        guard let startDate = calendar.date(from: dateComponents),
-              let endDate = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startDate) else {
-            fatalError("Invalid date components")
-        }
-        
-        var weekRanges = [Int: WeekExpenseRange]()
-        
-        calendar.enumerateDates(startingAfter: calendar.date(byAdding: .day, value: -1, to: startDate)!, matching: .init(hour: 0, minute: 0, second: 0), matchingPolicy: .nextTime) { date, _, stop in
-            guard let currentDate = date else { return }
-
-            if currentDate > endDate {
-                stop = true
-                return
-            }
-            
-            let currentWeekNumber = calendar.component(.weekOfMonth, from: currentDate)
-            var currentWeekRange = weekRanges[currentWeekNumber, default:
-                                                WeekExpenseRange(weekStart: currentDate, weekEnd: currentDate, expenses: [])]
-            
-            currentWeekRange.weekEnd = currentDate
-            weekRanges[currentWeekNumber] = currentWeekRange
-        }
-        
-        for expense in expenses {
-            let weekNumber = calendar.component(.weekOfMonth, from: expense.dateCreated)
-            weekRanges[weekNumber]?.expenses.append(expense)
-        }
-        
-        return Array(weekRanges.values)
-            .sorted(by: { $0.weekStart < $1.weekStart })
-    }
+//    static func getExpensesByWeek(for expenses: [Expense], year: Int, month: Int) -> [WeekExpenseRange] {
+//        let dateComponents = DateComponents(year: year, month: month)
+//        
+//        guard let startDate = calendar.date(from: dateComponents),
+//              let endDate = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startDate) else {
+//            fatalError("Invalid date components")
+//        }
+//        
+//        var weekRanges = [Int: WeekExpenseRange]()
+//        
+//        calendar.enumerateDates(startingAfter: calendar.date(byAdding: .day, value: -1, to: startDate)!, matching: .init(hour: 0, minute: 0, second: 0), matchingPolicy: .nextTime) { date, _, stop in
+//            guard let currentDate = date else { return }
+//
+//            if currentDate > endDate {
+//                stop = true
+//                return
+//            }
+//            
+//            let currentWeekNumber = calendar.component(.weekOfMonth, from: currentDate)
+//            var currentWeekRange = weekRanges[currentWeekNumber, default:
+//                                                WeekExpenseRange(weekStart: currentDate, weekEnd: currentDate, expenses: [])]
+//            
+//            currentWeekRange.weekEnd = currentDate
+//            weekRanges[currentWeekNumber] = currentWeekRange
+//        }
+//        
+//        for expense in expenses {
+//            let weekNumber = calendar.component(.weekOfMonth, from: expense.dateCreated)
+//            weekRanges[weekNumber]?.expenses.append(expense)
+//        }
+//        
+//        return Array(weekRanges.values)
+//            .sorted(by: { $0.weekStart < $1.weekStart })
+//    }
     
     static func getExpensesByMonth(for expenses: [Expense]) -> [Int: [Expense]] {
         let monthRange = calendar.range(of: .month, in: .year, for: Date())!

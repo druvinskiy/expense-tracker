@@ -13,7 +13,11 @@ struct RegistrationData: Codable {
 }
 
 struct User: Codable, Equatable {
-    let id: String?
-    var password: String?
-    let email: String?
+    let id: String
+    let email: String
+}
+
+struct LoginRequest: Codable {
+    let email: String
+    let password: String
 }
