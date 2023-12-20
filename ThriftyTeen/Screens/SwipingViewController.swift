@@ -169,7 +169,7 @@ class SwipingViewController: UIViewController {
         
         let action = UIAction(handler: {_ in
             let initialDate = ExpensesHelper.dateFrom(year: self.year, month: self.month)
-            let formVC = UIHostingController(rootView: AddExpenseForm(initialDate: initialDate) {
+            let formVC = UIHostingController(rootView: AddExpenseForm(initialDate: initialDate) { expenseAdded in
                 self.yearsVCDelegate.expenseAdded()
                 self.dismiss(animated: true)
             })

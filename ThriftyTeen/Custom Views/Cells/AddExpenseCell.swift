@@ -21,18 +21,17 @@ class AddExpenseCell: UICollectionViewCell {
         return graphicImageView
     }()
     
-//    var addButton: UIButton = {
-//        var configuration = UIButton.Configuration.filled()
-//        configuration.cornerStyle = .capsule
-//        configuration.baseBackgroundColor = .deepForestGreen
-//        configuration.baseForegroundColor = .white
-//        configuration.image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular))
-//
-//        let button = UIButton(configuration: configuration)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//
-//        return button
-//    }()
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseOut, .autoreverse], animations: {
+                    self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                }) { _ in
+                    self.transform = .identity
+                }
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,6 +87,20 @@ class AddExpenseCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func rotateImage() {
+        UIView.animate(withDuration: 0.5) {
+            self.graphicImageView.transform = CGAffineTransform(rotationAngle: .pi)
+        }
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.25,
+            options: UIView.AnimationOptions.curveEaseOut
+        ) {
+            self.graphicImageView.transform = CGAffineTransform(rotationAngle: 2 * .pi)
+        }
     }
 }
 

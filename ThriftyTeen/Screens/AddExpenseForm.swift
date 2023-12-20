@@ -15,9 +15,9 @@ struct AddExpenseForm: View {
     @State private var selectedCategory: Category?
     @Environment(\.colorScheme) var colorScheme
     
-    var dismissAction: (() -> Void)
+    var dismissAction: ((Bool) -> Void)
     
-    init(initialDate: Date = Date(), dismissAction: @escaping (() -> Void)) {
+    init(initialDate: Date = Date(), dismissAction: @escaping ((Bool) -> Void)) {
         _date = State(initialValue: initialDate)
         self.dismissAction = dismissAction
     }
@@ -103,7 +103,7 @@ struct AddExpenseForm: View {
                         
                         NetworkManager.shared.postExpense(category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date) { error in
                             DispatchQueue.main.async {
-                                dismissAction()
+                                dismissAction(true)
                             }
                         }
                     } label: {
@@ -130,7 +130,7 @@ struct AddExpenseForm: View {
             }
             .navigationTitle("Add Expense")
             .navigationBarItems(trailing: Button {
-                dismissAction()
+                dismissAction(false)
             } label: {
                 Image(systemName: "xmark")
                     .imageScale(.large)

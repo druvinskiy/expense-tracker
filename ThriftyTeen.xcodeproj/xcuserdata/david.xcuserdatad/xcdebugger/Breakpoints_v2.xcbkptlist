@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "766AE7D8-2EFA-4892-9986-EDA43A1A2A59"
+            uuid = "493699D8-941B-4182-AE62-FFC67E3B6EF1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ThriftyTeen/Screens/SwipingViewController.swift"
+            filePath = "ThriftyTeen/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "viewDidLayoutSubviews()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DE9689C3-3686-49FB-91F7-8CBDE7E54C45"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ThriftyTeen/Screens/SwipingViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "viewDidLayoutSubviews()"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "signOut(completed:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

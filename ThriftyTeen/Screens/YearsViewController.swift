@@ -103,11 +103,25 @@ class YearsViewController: UIViewController {
     }
     
     func addExpenseCellTapped() {
-        let formVC = UIHostingController(rootView: AddExpenseForm() {
+        let formVC = UIHostingController(rootView: AddExpenseForm() { expenseAdded in
             self.dismiss(animated: true)
+            
+            if expenseAdded {
+                self.rotateAddExpenseCellImage()
+            }
         })
         formVC.modalPresentationStyle = .fullScreen
-        self.present(formVC, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.present(formVC, animated: true)
+        }
+    }
+    
+    func rotateAddExpenseCellImage() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let cell = self.collectionView.visibleCells.compactMap({ $0 as? AddExpenseCell }).first
+            cell?.rotateImage()
+        }
     }
     
     func yearCellTapped(year: Int) {
@@ -115,7 +129,10 @@ class YearsViewController: UIViewController {
         selectedYear = year
         
         monthsVC = MonthsViewController(year: year, expenses: filteredExpenses, yearsVCDelegate: self)
-        navigationController?.pushViewController(monthsVC!, animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.navigationController?.pushViewController(self.monthsVC!, animated: true)
+        }
     }
 }
 

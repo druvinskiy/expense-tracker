@@ -16,6 +16,18 @@ class ExpenseCell: UICollectionViewCell {
     
     private let shadowColor = UIColor.label.cgColor
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseOut, .autoreverse], animations: {
+                    self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+                }) { _ in
+                    self.transform = .identity
+                }
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
