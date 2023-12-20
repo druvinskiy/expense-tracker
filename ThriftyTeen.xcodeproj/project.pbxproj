@@ -13,6 +13,7 @@
 		632928C62A40C3B3002EB729 /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632928C52A40C3B3002EB729 /* Int+Ext.swift */; };
 		632928C82A40ED3C002EB729 /* Decimal+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632928C72A40ED3C002EB729 /* Decimal+Ext.swift */; };
 		632B90CD2B2D36A800078A0B /* UITextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632B90CC2B2D36A800078A0B /* UITextField+Padding.swift */; };
+		632B90CF2B337B1300078A0B /* PlusIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632B90CE2B337B1300078A0B /* PlusIconView.swift */; };
 		63485FA129E8992700961EA6 /* MonthOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63485FA029E8992700961EA6 /* MonthOverviewViewController.swift */; };
 		63485FA329E8995E00961EA6 /* MonthOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63485FA229E8995E00961EA6 /* MonthOverviewCell.swift */; };
 		63805D582A23B3B300A4A082 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63805D572A23B3B300A4A082 /* EmptyStateView.swift */; };
@@ -65,6 +66,7 @@
 		632928C52A40C3B3002EB729 /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		632928C72A40ED3C002EB729 /* Decimal+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Ext.swift"; sourceTree = "<group>"; };
 		632B90CC2B2D36A800078A0B /* UITextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Padding.swift"; sourceTree = "<group>"; };
+		632B90CE2B337B1300078A0B /* PlusIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusIconView.swift; sourceTree = "<group>"; };
 		63394C7829F61C1B006C235F /* ThriftyTeen.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ThriftyTeen.entitlements; sourceTree = "<group>"; };
 		63485FA029E8992700961EA6 /* MonthOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthOverviewViewController.swift; sourceTree = "<group>"; };
 		63485FA229E8995E00961EA6 /* MonthOverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthOverviewCell.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				63805D572A23B3B300A4A082 /* EmptyStateView.swift */,
 				63F0881C2A3AA548008F6262 /* AddButtonArrowImageView.swift */,
 				63D189F72AB682CE00404803 /* AlertContainerView.swift */,
+				632B90CE2B337B1300078A0B /* PlusIconView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				63F0992E29B5973800B97BC2 /* SwipingViewController.swift in Sources */,
 				63F0992629B5967400B97BC2 /* ExpenseCell.swift in Sources */,
 				63AB660029BD839000E6E868 /* MonthExpensesListViewController.swift in Sources */,
+				632B90CF2B337B1300078A0B /* PlusIconView.swift in Sources */,
 				63E5593529B971EA00F46229 /* YearCell.swift in Sources */,
 				63F0992329B5960000B97BC2 /* DRBodyLabel.swift in Sources */,
 				63D189F82AB682CE00404803 /* AlertContainerView.swift in Sources */,
