@@ -203,6 +203,47 @@ class NetworkManager {
         task.resume()
     }
     
+    func deleteAccount(completed: @escaping (NetworkingError?) -> Void) {
+        guard let registrationData = registrationData else {
+            completed(.unableToComplete)
+            return
+        }
+        
+        let url = URL(string: baseUrl + "/users/\(registrationData.user.id)")
+        
+        guard let url = url else {
+            completed(.invalidURL)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = HttpMethods.DELETE.rawValue
+        request.addValue(Token.bearer(registrationData.token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let _ = error {
+                completed(.unableToComplete)
+                return
+            }
+            
+            let response = response as! HTTPURLResponse
+            
+            guard response.statusCode == .success || response.statusCode == .created else {
+                print(HTTPURLResponse.localizedString(forStatusCode: ))
+                completed(.invalidResponse)
+                return
+            }
+            
+            KeychainManager.shared.delete(service: .bearerToken, account: .expenseTracker)
+            self.registrationData = nil
+            
+            completed(nil)
+        }
+        
+        task.resume()
+    }
+    
     // MARK: - Expenses
     func fetchExpenses(completed: @escaping (Result<[Expense], NetworkingError>) -> Void) {
         let url = URL(string: baseUrl + "expenses")
