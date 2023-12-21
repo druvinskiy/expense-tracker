@@ -9,18 +9,6 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let signedOutAction: () -> ()
-    
-    init(signedOutAction: @escaping () -> ()) {
-        self.signedOutAction = signedOutAction
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,9 +48,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         NetworkManager.shared.signOut { error in
             DispatchQueue.main.async {
-                self.dismiss(animated: true) {
-                    self.signedOutAction()
-                }
+                let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate
+                sceneDelegate?.userSignedOut()
             }
         }
     }

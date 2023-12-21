@@ -37,9 +37,7 @@ class YearsViewController: UIViewController {
     }
     
     @objc func settingsButtonTapped() {
-        let settingsViewController = SettingsViewController {
-            self.dismiss(animated: false)
-        }
+        let settingsViewController = SettingsViewController()
         
         let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
         settingsNavigationController.navigationBar.prefersLargeTitles = true
