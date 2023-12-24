@@ -104,6 +104,7 @@ class NetworkManager {
                 
                 KeychainManager.shared.save(decodedResponse, service: .bearerToken, account: .expenseTracker)
                 self.registrationData = decodedResponse
+                print(self.registrationData?.token)
                 
                 completed(nil)
             } catch {
@@ -181,6 +182,9 @@ class NetworkManager {
         request.addValue(Token.bearer(token).authorizationHeaderValue, forHTTPHeaderField: HttpHeaders.authorization.rawValue)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            KeychainManager.shared.delete(service: .bearerToken, account: .expenseTracker)
+            self.registrationData = nil
+            
             if let _ = error {
                 completed(.unableToComplete)
                 return
@@ -193,9 +197,6 @@ class NetworkManager {
                 completed(.invalidResponse)
                 return
             }
-            
-            KeychainManager.shared.delete(service: .bearerToken, account: .expenseTracker)
-            self.registrationData = nil
             
             completed(nil)
         }

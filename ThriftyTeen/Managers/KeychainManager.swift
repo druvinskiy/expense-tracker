@@ -71,8 +71,7 @@ final class KeychainManager {
         let status = SecItemAdd(query, nil)
         
         if status != errSecSuccess {
-            // Print out the error
-            print("Error: \(status)")
+            assertionFailure("Fail to save data to keychain")
         }
     }
     
