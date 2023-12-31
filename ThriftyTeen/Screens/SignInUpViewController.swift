@@ -199,6 +199,7 @@ class SignInUpViewController: UIViewController, UITextFieldDelegate {
             let navigationController = UINavigationController(rootViewController: YearsViewController())
             navigationController.navigationBar.prefersLargeTitles = true
             navigationController.modalPresentationStyle = .overFullScreen
+            navigationController.navigationBar.tintColor = .label
             
             self.present(navigationController, animated: false)
         }
