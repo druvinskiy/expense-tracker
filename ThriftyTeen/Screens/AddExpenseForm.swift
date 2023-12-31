@@ -13,7 +13,7 @@ struct AddExpenseForm: View {
     @State private var date: Date
     @State private var categories = [Category]()
     @State private var selectedCategory: Category?
-    @Environment(\.colorScheme) var colorScheme
+    @State private var addUpdateExpenseError: AddUpdateExpenseError?
     
     var dismissAction: ((Bool) -> Void)
     
@@ -37,109 +37,113 @@ struct AddExpenseForm: View {
     @FocusState private var focusedField: FormField?
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("General information")) {
-                    TextField("Title", text: $title)
-                        .submitLabel(.next)
-                        .focused($focusedField, equals: .title)
-                    
-                    TextField("Amount", text: Binding(
-                        get: {
-                            return amount
-                        },
-                        set: { newValue in
-                            if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
-                                amount = formattedValue
-                            } else {
-                                amount = newValue
-                            }
-                        }
-                    ))
-                    .keyboardType(.decimalPad)
-                    .focused($focusedField, equals: .amount)
-                    
-                    DatePicker("Date",
-                               selection: $date,
-                               displayedComponents: .date)
-                }
-                
-                Section(header: Text("Category")) {
-                    ForEach(categories) { category in
-                        Button {
-                            selectedCategory = category
-                        } label: {
-                            HStack(spacing: 12) {
-                                HStack {
-                                    Image(category.iconName)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 30, height: 30)
-                                    
-                                    Text(category.name)
-                                        .foregroundColor(Color(.label))
-                                }
-                                Spacer()
-                                
-                                if selectedCategory == category {
-                                    Image(systemName: "checkmark")
-                                }
-                            }
-                        }
-                    }
-                    .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
-                    
-                    NavigationLink(destination: CategoriesListView(categories: $categories)) {
-                        Text("New Category")
-                    }
-                }
-                
-                Section {
-                    Button {
-                        guard let selectedCategory = selectedCategory, let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD")
-                        else {
-                            return
-                        }
+        ZStack {
+            NavigationView {
+                Form {
+                    Section {
+                        TextField("Title", text: $title)
+                            .submitLabel(.next)
+                            .focused($focusedField, equals: .title)
                         
-                        NetworkManager.shared.postExpense(category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date) { error in
-                            DispatchQueue.main.async {
-                                dismissAction(true)
+                        TextField("Amount", text: Binding(
+                            get: {
+                                return amount
+                            },
+                            set: { newValue in
+                                if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
+                                    amount = formattedValue
+                                } else {
+                                    amount = newValue
+                                }
+                            }
+                        ))
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .amount)
+                        
+                        DatePicker("Date", selection: $date, displayedComponents: .date)
+                            .tint(Color(UIColor.azureBlue))
+                    } header: {
+                        Text("General information")
+                    }
+                    
+                    Section {
+                        ForEach(categories) { category in
+                            Button {
+                                selectedCategory = category
+                            } label: {
+                                HStack(spacing: 12) {
+                                    HStack {
+                                        Image(category.iconName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                        
+                                        Text(category.name)
+                                            .foregroundColor(Color(.label))
+                                    }
+                                    Spacer()
+                                    
+                                    if selectedCategory == category {
+                                        Image(systemName: "checkmark")
+                                            .tint(Color(.azureBlue))
+                                    }
+                                }
                             }
                         }
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Create")
-                                .foregroundColor(.white)
-                            Spacer()
+                        .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+                        
+                        NavigationLink(destination: CategoriesListView(categories: $categories, selectedCategory: $selectedCategory)) {
+                            Text("New Category")
                         }
-                        .padding(.vertical, 8)
-                        .background(Color(UIColor.azureBlue))
-                        .cornerRadius(5)
+                    } header: {
+                        Text("Category")
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    
+                    Section {
+                        Button {
+                            postExpense()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Text("Create")
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.vertical, 8)
+                            .background(Color(UIColor.azureBlue))
+                            .cornerRadius(5)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
-            }
-            .onSubmit {
-                switch focusedField {
-                case .title:
-                    focusedField = .amount
-                default:
-                    focusedField = nil
+                .onSubmit {
+                    switch focusedField {
+                    case .title:
+                        focusedField = .amount
+                    default:
+                        focusedField = nil
+                    }
                 }
+                .navigationTitle("Add Expense")
+                .navigationBarItems(trailing: Button {
+                    dismissAction(false)
+                } label: {
+                    Image(systemName: "xmark")
+                        .imageScale(.large)
+                        .frame(width: 44, height: 44)
+                        .foregroundColor(.primary)
+                })
             }
-            .navigationTitle("Add Expense")
-            .navigationBarItems(trailing: Button {
-                dismissAction(false)
-            } label: {
-                Image(systemName: "xmark")
-                    .imageScale(.large)
-                    .frame(width: 44, height: 44)
-                    .foregroundColor(.primary)
-            })
-        }
-        .onAppear {
-            fetchCategories()
+            .tint(.primary)
+            .onAppear {
+                fetchCategories()
+            }
+            
+            if addUpdateExpenseError != nil {
+                ExpenseAlertView(addExpenseError: $addUpdateExpenseError)
+                    .background(Color.black.opacity(0.75).edgesIgnoringSafeArea(.all))
+                    .zIndex(1)
+            }
         }
     }
     
@@ -151,6 +155,31 @@ struct AddExpenseForm: View {
                 self.selectedCategory = categories.first
             case .failure(_):
                 break
+            }
+        }
+    }
+    
+    func postExpense() {
+        withAnimation {
+            guard !title.isEmpty else {
+                addUpdateExpenseError = .invalidExpenseTitle
+                return
+            }
+            
+            guard let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD") else {
+                addUpdateExpenseError = .invalidExpenseAmount
+                return
+            }
+            
+            guard let selectedCategory = selectedCategory else {
+                addUpdateExpenseError = .noCategorySelected
+                return
+            }
+            
+            NetworkManager.shared.postExpense(category: selectedCategory, title: title, amount: intAmount, currencyCode: "USD", dateCreated: date) { error in
+                DispatchQueue.main.async {
+                    dismissAction(true)
+                }
             }
         }
     }

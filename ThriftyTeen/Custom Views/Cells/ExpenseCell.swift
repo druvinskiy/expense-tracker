@@ -46,7 +46,6 @@ class ExpenseCell: UICollectionViewCell {
     
     private func configure() {
         backgroundColor = .smokyCharcoal.withAlphaComponent(0.2)
-//        #colorLiteral(red: 0.7034259439, green: 0.6529470086, blue: 0.9137045741, alpha: 1)
         
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true

@@ -15,7 +15,7 @@ extension UICollectionView {
         let itemWidth = availableWidth
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         flowLayout.itemSize = CGSize(width: itemWidth, height: 75)
         flowLayout.minimumLineSpacing = 16
         
@@ -30,8 +30,9 @@ extension UICollectionView {
         let itemWidth = availableWidth / 2
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: 0, right: padding)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        print("Foo: \(flowLayout.itemSize.height)")
         
         return flowLayout
     }

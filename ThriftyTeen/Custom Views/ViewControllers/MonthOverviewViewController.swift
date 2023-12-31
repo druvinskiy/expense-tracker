@@ -32,13 +32,25 @@ class MonthOverviewViewController: UIViewController {
     func configureViewController() {
         view.translatesAutoresizingMaskIntoConstraints = false
         
+        let collectionViewItemHeight = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.height
+        
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 200)
+            view.heightAnchor.constraint(equalToConstant: collectionViewItemHeight)
+        ])
+        
+        view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
     func configureCollectionView() {
-        view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground

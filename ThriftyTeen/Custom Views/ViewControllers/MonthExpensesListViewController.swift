@@ -86,11 +86,11 @@ class MonthExpensesListViewController: UIViewController {
         monthOverviewVC.didMove(toParent: self)
         
         NSLayoutConstraint.activate([
-            monthOverviewVC.view.topAnchor.constraint(equalTo: monthLabel.bottomAnchor),
+            monthOverviewVC.view.topAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: 12),
             monthOverviewVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             monthOverviewVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: monthOverviewVC.view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: monthOverviewVC.view.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

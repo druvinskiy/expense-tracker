@@ -13,6 +13,7 @@ struct UpdateExpenseForm: View {
     @State private var date = Date()
     @State private var selectedCategory: Category?
     @State private var categories = [Category]()
+    @State private var addUpdateExpenseError: AddUpdateExpenseError?
     
     var dismissAction: (() -> Void)
     let expense: Expense
@@ -44,147 +45,151 @@ struct UpdateExpenseForm: View {
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("General Information")) {
-                    TextField("Title", text: $title)
-                        .submitLabel(.next)
-                        .focused($focusedField, equals: .title)
-                    
-                    TextField("Amount", text: Binding(
-                        get: {
-                            return amount
-                        },
-                        set: { newValue in
-                            if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
-                                amount = formattedValue
-                            } else {
-                                amount = newValue
-                            }
-                        }
-                    ))
-                    .keyboardType(.decimalPad)
-                    .focused($focusedField, equals: .amount)
-                    
-                    DatePicker("Date",
-                               selection: $date,
-                               displayedComponents: .date)
-                }
-                
-                Section(header: Text("Category")) {
-                    ForEach(categories) { category in
-                        Button {
-                            selectedCategory = category
-                        } label: {
-                            HStack(spacing: 12) {
-                                HStack {
-                                    Image(category.iconName)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 30, height: 30)
-                                    
-                                    Text(category.name)
-                                        .foregroundColor(Color(.label))
-                                }
-                                Spacer()
-                                
-                                if selectedCategory == category {
-                                    Image(systemName: "checkmark")
-                                }
-                            }
-                        }
-                    }
-                    .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
-                    
-                    NavigationLink(destination: CategoriesListView(categories: $categories)) {
-                        Text("New Category")
-                    }
-                }
-                
-                Section {
-                    VStack {
-//                        Button {
-//                            patchExpense()
-//                        } label: {
-//                            HStack {
-//                                Spacer()
-//                                Text("Update")
-//                                    .foregroundColor(.white)
-//                                Spacer()
-//                            }
-//                            .padding(.vertical, 8)
-//                            .background(Color(UIColor.azureBlue))
-//                            .cornerRadius(5)
-//                        }
-//                        .buttonStyle(PlainButtonStyle())
+        ZStack {
+            NavigationView {
+                Form {
+                    Section {
+                        TextField("Title", text: $title)
+                            .submitLabel(.next)
+                            .focused($focusedField, equals: .title)
                         
-                        Button {
-                            deleteExpense()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Delete")
-                                    .foregroundColor(.white)
-                                Spacer()
+                        TextField("Amount", text: Binding(
+                            get: {
+                                return amount
+                            },
+                            set: { newValue in
+                                if let decimal = Decimal(string: newValue), let formattedValue = currencyFormatter.string(from: NSDecimalNumber(decimal: decimal)) {
+                                    amount = formattedValue
+                                } else {
+                                    amount = newValue
+                                }
                             }
-                            .padding(.vertical, 8)
-                            .background(Color(UIColor.scarletRed))
-                            .cornerRadius(5)
+                        ))
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .amount)
+                        
+                        DatePicker("Date",
+                                   selection: $date,
+                                   displayedComponents: .date)
+                    } header: {
+                        Text("General Information")
+                    }
+                    
+                    Section(header: Text("Category")) {
+                        ForEach(categories) { category in
+                            Button {
+                                selectedCategory = category
+                            } label: {
+                                HStack(spacing: 12) {
+                                    HStack {
+                                        Image(category.iconName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 30, height: 30)
+                                        
+                                        Text(category.name)
+                                            .foregroundColor(Color(.label))
+                                    }
+                                    Spacer()
+                                    
+                                    if selectedCategory == category {
+                                        Image(systemName: "checkmark")
+                                            .tint(Color(.azureBlue))
+                                    }
+                                }
+                            }
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        .listRowBackground(Color(UIColor.secondarySystemGroupedBackground))
+                        
+                        NavigationLink(destination: CategoriesListView(categories: $categories, selectedCategory: $selectedCategory)) {
+                            Text("New Category")
+                        }
+                    }
+                    
+                    Section {
+                        VStack {
+                            Button {
+                                deleteExpense()
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Text("Delete")
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                }
+                                .padding(.vertical, 8)
+                                .background(Color(UIColor.scarletRed))
+                                .cornerRadius(5)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
                     }
                 }
-            }
-            .onSubmit {
-                switch focusedField {
-                case .title:
-                    focusedField = .amount
-                default:
-                    focusedField = nil
+                .onSubmit {
+                    switch focusedField {
+                    case .title:
+                        focusedField = .amount
+                    default:
+                        focusedField = nil
+                    }
                 }
+                .navigationTitle("Update \(expense.title)")
+                .navigationBarItems(leading: Button {
+                    dismissAction()
+                } label: {
+                    Text("Cancel")
+                        .foregroundColor(Color(.label))
+                }, trailing: Button {
+                    patchExpense()
+                } label: {
+                    Text("Done")
+                        .foregroundColor(Color(UIColor.azureBlue))
+                })
             }
-            .navigationTitle("Update \(expense.title)")
-            .navigationBarItems(leading: Button {
-                dismissAction()
-            } label: {
-                Text("Cancel")
-                    .foregroundColor(Color(.label))
-            }, trailing: Button {
-                patchExpense()
-            } label: {
-//                Image(systemName: "xmark")
-//                    .imageScale(.large)
-//                    .frame(width: 44, height: 44)
-//                    .foregroundColor(.primary)
-                Text("Done")
-                    .foregroundColor(Color(UIColor.azureBlue))
-            })
-        }
-        .onAppear {
-            fetchCategories()
+            .tint(.primary)
+            .onAppear {
+                fetchCategories()
+            }
+            
+            if addUpdateExpenseError != nil {
+                ExpenseAlertView(addExpenseError: $addUpdateExpenseError)
+                    .background(Color.black.opacity(0.75).edgesIgnoringSafeArea(.all))
+                    .zIndex(1)
+            }
         }
     }
     
     func patchExpense() {
-        guard let selectedCategory = selectedCategory,
-              let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD")
-        else {
+        guard let selectedCategory = selectedCategory else {
             return
         }
         
-        NetworkManager.shared.patchExpense(expenseId: expense.id,
-                                           categoryId: selectedCategory.id,
-                                           title: title,
-                                           amount: intAmount,
-                                           currencyCode: "USD",
-                                           dateCreated: date)
-        { error in
-            guard error == nil else {
+        withAnimation {
+            
+            guard !title.isEmpty else {
+                addUpdateExpenseError = .invalidExpenseTitle
                 return
             }
             
-            DispatchQueue.main.async {
-                self.dismissAction()
+            guard let intAmount = currencyFormatter.number(from: amount)?.decimalValue.convertToInt(currencyCode: "USD") else {
+                addUpdateExpenseError = .invalidExpenseAmount
+                return
+            }
+            
+            NetworkManager.shared.patchExpense(expenseId: expense.id,
+                                               categoryId: selectedCategory.id,
+                                               title: title,
+                                               amount: intAmount,
+                                               currencyCode: "USD",
+                                               dateCreated: date)
+            { error in
+                guard error == nil else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.dismissAction()
+                }
             }
         }
     }

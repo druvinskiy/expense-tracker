@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let navigationController = UINavigationController(rootViewController: YearsViewController())
             navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.tintColor = .label
+            
             window?.rootViewController = navigationController
         } else {
             window?.rootViewController = SignInUpViewController()

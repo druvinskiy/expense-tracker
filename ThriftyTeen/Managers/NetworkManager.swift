@@ -312,9 +312,9 @@ class NetworkManager {
         fetchGenericJSONData(url: url, completed: completed)
     }
     
-    func postCategory(iconName: String, name: String, completed: @escaping (NetworkingError?) -> Void) {
+    func postCategory(iconName: String, name: String, completed: @escaping (Result<Category, NetworkingError>) -> Void) {
         guard let user = registrationData?.user else {
-            completed(.unableToComplete)
+            completed(.failure(.unableToComplete))
             return
         }
         
