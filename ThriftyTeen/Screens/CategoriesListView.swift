@@ -17,11 +17,11 @@ struct CategoriesListView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    let columns: [GridItem] = [
-        GridItem(.adaptive(minimum: 60)),
-        //        GridItem(.adaptive(minimum: 60)),
-        //        GridItem(.adaptive(minimum: 60)),
-    ]
+    var columns: [GridItem] = {
+        let item = GridItem(.flexible(minimum: 50, maximum: 70), spacing: 10, alignment: .center)
+        return Array(repeating: item, count: 4)
+        
+    }()
     
     enum CreateCategoryError {
         static let invalidName = "Please enter a valid name for your category."
@@ -36,24 +36,26 @@ struct CategoriesListView: View {
                 
                 Section(header: Text("Select an icon")) {
                     ScrollView(showsIndicators: false) {
-                        LazyVGrid(columns: columns, spacing: 30) {
+                        LazyVGrid(columns: columns, spacing: 10) {
                             ForEach(0..<50) { index in
                                 Image("Icon\(index)")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 60, height: 40)
+                                    .padding()
+//                                    .frame(width: 60, height: 50)
+                                    .frame(maxHeight: 80)
+//                                    .frame(height: 80)
                                     .onTapGesture {
                                         selectedIndex = index
                                     }
                                     .background((index == selectedIndex ? Color(UIColor.smokyCharcoal.withAlphaComponent(0.4))
                                                  : .clear)
-                                        .frame(width: 62, height: 75)
                                         .cornerRadius(5))
                             }
                         }
-                        .padding([.top, .bottom], 20)
+//                        .padding([.top, .bottom], 20)
                     }
-                    .frame(height: 260)
+                    .frame(height: 220)
                 }
                 
                 Button {

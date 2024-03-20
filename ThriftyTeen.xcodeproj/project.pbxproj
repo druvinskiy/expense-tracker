@@ -30,15 +30,18 @@
 		63AECEF229C95BD3005D5732 /* AddExpenseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AECEF129C95BD3005D5732 /* AddExpenseForm.swift */; };
 		63B191F929CE82B9008C010B /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B191F829CE82B9008C010B /* CategoriesListView.swift */; };
 		63B191FB29CE87F7008C010B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B191FA29CE87F7008C010B /* Category.swift */; };
-		63D17AF02A8484FF009C9264 /* SignInUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D17AEF2A8484FF009C9264 /* SignInUpViewController.swift */; };
 		63D189F62AB6631F00404803 /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D189F52AB6631F00404803 /* ValidationManager.swift */; };
 		63D189F82AB682CE00404803 /* AlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D189F72AB682CE00404803 /* AlertContainerView.swift */; };
 		63D189FA2AB6832700404803 /* SignInUpAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D189F92AB6832700404803 /* SignInUpAlertViewController.swift */; };
 		63D189FC2AB8E19400404803 /* UIViewController+CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D189FB2AB8E19300404803 /* UIViewController+CustomAlert.swift */; };
 		63D189FE2AC5117A00404803 /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D189FD2AC5117A00404803 /* SignInError.swift */; };
+		63DD35662B730DC300338DD0 /* IconScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD35652B730DC300338DD0 /* IconScrollView.swift */; };
+		63DD35682B784DE700338DD0 /* FlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD35672B784DE700338DD0 /* FlowViewController.swift */; };
+		63DD356A2B784F3A00338DD0 /* FlowContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD35692B784F3A00338DD0 /* FlowContainerView.swift */; };
 		63E5593229B9715A00F46229 /* YearsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E5593129B9715A00F46229 /* YearsViewController.swift */; };
 		63E5593529B971EA00F46229 /* YearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E5593429B971EA00F46229 /* YearCell.swift */; };
 		63EB393629F833B400579212 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63EB393829F833B400579212 /* Localizable.strings */; };
+		63EB54F12B4775E600CEB1B5 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EB54F02B4775E600CEB1B5 /* GreetingViewController.swift */; };
 		63F088152A33FFE9008F6262 /* NetworkingViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F088142A33FFE9008F6262 /* NetworkingViewManager.swift */; };
 		63F0881D2A3AA548008F6262 /* AddButtonArrowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0881C2A3AA548008F6262 /* AddButtonArrowImageView.swift */; };
 		63F098F529B58E0200B97BC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F098F429B58E0200B97BC2 /* AppDelegate.swift */; };
@@ -87,15 +90,18 @@
 		63AECEF129C95BD3005D5732 /* AddExpenseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseForm.swift; sourceTree = "<group>"; };
 		63B191F829CE82B9008C010B /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		63B191FA29CE87F7008C010B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		63D17AEF2A8484FF009C9264 /* SignInUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpViewController.swift; sourceTree = "<group>"; };
 		63D189F52AB6631F00404803 /* ValidationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
 		63D189F72AB682CE00404803 /* AlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContainerView.swift; sourceTree = "<group>"; };
 		63D189F92AB6832700404803 /* SignInUpAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpAlertViewController.swift; sourceTree = "<group>"; };
 		63D189FB2AB8E19300404803 /* UIViewController+CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CustomAlert.swift"; sourceTree = "<group>"; };
 		63D189FD2AC5117A00404803 /* SignInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInError.swift; sourceTree = "<group>"; };
+		63DD35652B730DC300338DD0 /* IconScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconScrollView.swift; sourceTree = "<group>"; };
+		63DD35672B784DE700338DD0 /* FlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowViewController.swift; sourceTree = "<group>"; };
+		63DD35692B784F3A00338DD0 /* FlowContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowContainerView.swift; sourceTree = "<group>"; };
 		63E5593129B9715A00F46229 /* YearsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsViewController.swift; sourceTree = "<group>"; };
 		63E5593429B971EA00F46229 /* YearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearCell.swift; sourceTree = "<group>"; };
 		63EB393729F833B400579212 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		63EB54F02B4775E600CEB1B5 /* GreetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		63F088142A33FFE9008F6262 /* NetworkingViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingViewManager.swift; sourceTree = "<group>"; };
 		63F0881C2A3AA548008F6262 /* AddButtonArrowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonArrowImageView.swift; sourceTree = "<group>"; };
 		63F098F129B58E0200B97BC2 /* ThriftyTeen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThriftyTeen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +249,8 @@
 				63D189F72AB682CE00404803 /* AlertContainerView.swift */,
 				632B90CE2B337B1300078A0B /* PlusIconView.swift */,
 				632D05582B41F22200DBF8FF /* ExpenseAlertView.swift */,
+				63DD35652B730DC300338DD0 /* IconScrollView.swift */,
+				63DD35692B784F3A00338DD0 /* FlowContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,7 +294,6 @@
 		63F0992C29B5971A00B97BC2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				63D17AEF2A8484FF009C9264 /* SignInUpViewController.swift */,
 				63E5593129B9715A00F46229 /* YearsViewController.swift */,
 				639A131029B660920069E39E /* MonthsViewController.swift */,
 				63F0992D29B5973800B97BC2 /* SwipingViewController.swift */,
@@ -294,6 +301,8 @@
 				63B191F829CE82B9008C010B /* CategoriesListView.swift */,
 				632928BD2A3E62ED002EB729 /* UpdateExpenseForm.swift */,
 				63F9C3742AD7601800743873 /* SettingsViewController.swift */,
+				63EB54F02B4775E600CEB1B5 /* GreetingViewController.swift */,
+				63DD35672B784DE700338DD0 /* FlowViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -382,6 +391,7 @@
 				63F0991029B5944200B97BC2 /* NetworkManager.swift in Sources */,
 				63F9C3772AD76D3C00743873 /* SettingsCell.swift in Sources */,
 				63AECEF229C95BD3005D5732 /* AddExpenseForm.swift in Sources */,
+				63DD356A2B784F3A00338DD0 /* FlowContainerView.swift in Sources */,
 				63805D582A23B3B300A4A082 /* EmptyStateView.swift in Sources */,
 				632B90CD2B2D36A800078A0B /* UITextField+Padding.swift in Sources */,
 				63485FA329E8995E00961EA6 /* MonthOverviewCell.swift in Sources */,
@@ -398,13 +408,14 @@
 				63F0991C29B5956900B97BC2 /* WeekOverviewView.swift in Sources */,
 				63D189FE2AC5117A00404803 /* SignInError.swift in Sources */,
 				632D05592B41F22200DBF8FF /* ExpenseAlertView.swift in Sources */,
+				63EB54F12B4775E600CEB1B5 /* GreetingViewController.swift in Sources */,
+				63DD35682B784DE700338DD0 /* FlowViewController.swift in Sources */,
 				63D189F62AB6631F00404803 /* ValidationManager.swift in Sources */,
 				63F0991329B594A900B97BC2 /* UIColor+CustomColors.swift in Sources */,
 				63F0992B29B596E200B97BC2 /* Expense.swift in Sources */,
 				639FBDE629E8D892008CEF57 /* OverviewCellViewModel.swift in Sources */,
 				632D05532B3F9B2900DBF8FF /* ExpenseAlertViewController.swift in Sources */,
 				63F0991729B5950000B97BC2 /* WeekExpensesListViewController.swift in Sources */,
-				63D17AF02A8484FF009C9264 /* SignInUpViewController.swift in Sources */,
 				63485FA129E8992700961EA6 /* MonthOverviewViewController.swift in Sources */,
 				632928C42A3FF1B4002EB729 /* User.swift in Sources */,
 				63F098F529B58E0200B97BC2 /* AppDelegate.swift in Sources */,
@@ -418,6 +429,7 @@
 				63F0991F29B595B900B97BC2 /* DRTitleLabel.swift in Sources */,
 				639A131329B6620C0069E39E /* UICollectionView+ViewControllerFactory.swift in Sources */,
 				639A131129B660920069E39E /* MonthsViewController.swift in Sources */,
+				63DD35662B730DC300338DD0 /* IconScrollView.swift in Sources */,
 				632928C82A40ED3C002EB729 /* Decimal+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

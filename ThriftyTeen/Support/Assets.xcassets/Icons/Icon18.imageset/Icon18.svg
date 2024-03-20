@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="307.1" height="340" viewBox="0 0 307.1 340">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #bcbfd3;
+        stroke: #bcbfd3;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 30px;
+      }
+
+      .cls-3 {
+        fill: #5876ba;
+      }
+
+      .cls-4 {
+        fill: #f04b36;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Grouped">
+    <g>
+      <g>
+        <rect class="cls-1" x="15" y="107.1" width="277.1" height="217.9" rx="32" ry="32"/>
+        <rect class="cls-1" x="122.3" y="107.1" width="62.5" height="217.9"/>
+        <g>
+          <path class="cls-1" d="m194.8,25h0c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h-34.3v-34.3c0-18.9,15.4-34.3,34.3-34.3Z"/>
+          <path class="cls-1" d="m78,25h34.3c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h0c-18.9,0-34.3-15.4-34.3-34.3V25h0Z" transform="translate(224.6 118.6) rotate(-180)"/>
+        </g>
+      </g>
+      <g>
+        <rect class="cls-2" x="15" y="97.1" width="277.1" height="217.9" rx="32" ry="32"/>
+        <rect class="cls-2" x="122.3" y="97.1" width="62.5" height="217.9"/>
+        <g>
+          <path class="cls-2" d="m194.8,15h0c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h-34.3v-34.3c0-18.9,15.4-34.3,34.3-34.3Z"/>
+          <path class="cls-2" d="m78,15h34.3c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h0c-18.9,0-34.3-15.4-34.3-34.3V15h0Z" transform="translate(224.6 98.6) rotate(180)"/>
+        </g>
+      </g>
+      <g>
+        <rect class="cls-4" x="15" y="97.1" width="277.1" height="217.9" rx="32" ry="32"/>
+        <rect class="cls-3" x="122.3" y="97.1" width="62.5" height="217.9"/>
+        <g>
+          <path class="cls-3" d="m194.8,15h0c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h-34.3v-34.3c0-18.9,15.4-34.3,34.3-34.3Z"/>
+          <path class="cls-3" d="m78,15h34.3c18.9,0,34.3,15.4,34.3,34.3h0c0,18.9-15.4,34.3-34.3,34.3h0c-18.9,0-34.3-15.4-34.3-34.3V15h0Z" transform="translate(224.6 98.6) rotate(180)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

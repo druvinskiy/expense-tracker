@@ -97,9 +97,7 @@ struct AddExpenseForm: View {
                         }
                     } header: {
                         Text("Category")
-                    }
-                    
-                    Section {
+                    } footer: {
                         Button {
                             postExpense()
                         } label: {
@@ -109,11 +107,11 @@ struct AddExpenseForm: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            .padding(.vertical, 8)
-                            .background(Color(UIColor.azureBlue))
-                            .cornerRadius(5)
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 20)
+                        .tint(Color(UIColor.azureBlue))
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
                     }
                 }
                 .onSubmit {

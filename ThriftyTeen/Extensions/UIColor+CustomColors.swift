@@ -10,6 +10,7 @@ import UIKit
 extension UIColor {
     static let amberGold = UIColor(named: "amberGold")!
     static let azureBlue = UIColor(named: "azureBlue")!
+    static let azureBlueDark = UIColor(named: "azureBlueDark")!
     static let deepForestGreen = UIColor(named: "deepForestGreen")!
     static let fuchsiaPink = UIColor(named: "fuchsiaPink")!
     static let mistyBlue = UIColor(named: "mistyBlue")!

@@ -32,7 +32,6 @@ extension UICollectionView {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        print("Foo: \(flowLayout.itemSize.height)")
         
         return flowLayout
     }

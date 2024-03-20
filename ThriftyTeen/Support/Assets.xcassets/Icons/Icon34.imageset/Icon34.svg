@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="230.5" height="340" viewBox="0 0 230.5 340">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #bcbfd3;
+        stroke: #bcbfd3;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 30px;
+      }
+
+      .cls-3 {
+        fill: #747f93;
+      }
+
+      .cls-4 {
+        fill: #b1c5e6;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #fff;
+      }
+
+      .cls-5 {
+        fill: #50555f;
+      }
+    </style>
+  </defs>
+  <g id="Grouped">
+    <g>
+      <g>
+        <rect class="cls-1" x="15" y="25" width="200.5" height="300" rx="34" ry="34"/>
+        <rect class="cls-1" x="35.6" y="61.7" width="159.3" height="207" rx="11.8" ry="11.8"/>
+        <rect class="cls-1" x="92.1" y="35.3" width="46.3" height="14.5" rx="7.2" ry="7.2"/>
+        <circle class="cls-1" cx="115.3" cy="297.1" r="19.4"/>
+      </g>
+      <g>
+        <rect class="cls-2" x="15" y="15" width="200.5" height="300" rx="34" ry="34"/>
+        <rect class="cls-2" x="35.6" y="51.7" width="159.3" height="207" rx="11.8" ry="11.8"/>
+        <rect class="cls-2" x="92.1" y="25.3" width="46.3" height="14.5" rx="7.2" ry="7.2"/>
+        <circle class="cls-2" cx="115.3" cy="287.1" r="19.4"/>
+      </g>
+      <g>
+        <rect class="cls-5" x="15" y="15" width="200.5" height="300" rx="34" ry="34"/>
+        <rect class="cls-4" x="35.6" y="51.7" width="159.3" height="207" rx="11.8" ry="11.8"/>
+        <rect class="cls-3" x="92.1" y="25.3" width="46.3" height="14.5" rx="7.2" ry="7.2"/>
+        <circle class="cls-3" cx="115.3" cy="287.1" r="19.4"/>
+      </g>
+    </g>
+  </g>
+</svg>
